@@ -1,0 +1,4 @@
+= Quicks Start =
+
+* Download jar file from [http://pos-device-simulator.googlecode.com/files/pos-device-sim-1.0.jar here]
+* Update project jpos.xml to use simulated devices
