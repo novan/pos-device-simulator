@@ -100,12 +100,10 @@ public abstract class AbstractSimulatedService {
     }
 
     public boolean getClaimed() throws JposException {
-        checkIfOpen();
         return claimed;
     }
 
     public boolean getDeviceEnabled() throws JposException {
-        checkIfOpen();
         return enabled;
     }
 
@@ -206,7 +204,6 @@ public abstract class AbstractSimulatedService {
     }
 
     public boolean getFreezeEvents() throws JposException {
-        checkIfOpen();
         return freezeEvents;
     }
 
