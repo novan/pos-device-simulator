@@ -1,5 +1,5 @@
 Getting started:
   # Download latest jar file from [http://pos-device-simulator.googlecode.com/files/pos-device-sim-1.0.jar here]
-  # Update project jpos.xml to use simulated devices.  _NOTE_ a new jpos.xml may be necessary to simulated all devices.
+  # Update or create a new jpos.xml for the device simulator.
     * *Example of Simuluated MSR* <JposEntry logicalName="simulatedMSR"><creation serviceClass="org.jumpmind.pos.javapos.sim.SimulatedMSRService" /></JposEntry>
   # Run Point of Sale application 
