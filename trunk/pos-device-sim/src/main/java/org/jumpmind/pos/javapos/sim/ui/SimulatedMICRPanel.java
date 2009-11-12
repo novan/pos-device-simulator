@@ -34,19 +34,18 @@ public class SimulatedMICRPanel extends BaseSimulatedPanel {
     private Map<String, MICRBean> items = new HashMap<String, MICRBean>();
     private MICRBean selectedItem;
 
-    private SimulatedMICRService deviceCallback;   
-
+    private SimulatedMICRService deviceCallback;
 
     private SimulatedMICRPanel() {
     }
-    
+
     public static SimulatedMICRPanel getInstance() {
         if (me == null) {
             me = new SimulatedMICRPanel();
         }
         return me;
     }
-    
+
     public MICRBean getSelectedItem() {
         return selectedItem;
     }
@@ -57,16 +56,16 @@ public class SimulatedMICRPanel extends BaseSimulatedPanel {
 
     public void init() {
         setInitialized(true);
-        
+
         this.selectedItem = new MICRBean();
         this.setFocusable(false);
         this.setBackground(Color.LIGHT_GRAY);
-        
+
         JButton button1 = new JButton("Enter");
         button1.setSize(200, 20);
-        
+
         loadItems();
-        
+
         final JLabel lblAccountNumber = new JLabel("Account Number : ");
         final JTextField txtAccountNumber = new JTextField("");
         final JLabel lblAmount = new JLabel("Amount : ");
@@ -85,9 +84,9 @@ public class SimulatedMICRPanel extends BaseSimulatedPanel {
         final JTextField txtSerialNumber = new JTextField("");
         final JLabel lblTransitNumber = new JLabel("Transit Number : ");
         final JTextField txtTransitNumber = new JTextField("");
-        
+
         JComboBox cbItems = new JComboBox(loadItemMICRBeans());
-        
+
         cbItems.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JComboBox cb = (JComboBox) e.getSource();
@@ -98,16 +97,18 @@ public class SimulatedMICRPanel extends BaseSimulatedPanel {
                 txtAmount.setText(item.getAmount());
                 txtBankNumber.setText(item.getBankNumber());
                 try {
-                    txtCheckType.setText(new Integer(item.getCheckType()).toString());
-                }
-                catch (Exception ex) {
-                    logger.warn("Unable to set check type, not a valid integer.");
+                    txtCheckType.setText(new Integer(item.getCheckType())
+                            .toString());
+                } catch (Exception ex) {
+                    logger
+                            .warn("Unable to set check type, not a valid integer.");
                 }
                 try {
-                    txtCountryCode.setText(new Integer(item.getCountryCode()).toString());
-                }
-                catch (Exception ex) {
-                    logger.warn("Unable to set country code, not a valid integer.");
+                    txtCountryCode.setText(new Integer(item.getCountryCode())
+                            .toString());
+                } catch (Exception ex) {
+                    logger
+                            .warn("Unable to set country code, not a valid integer.");
                 }
                 txtEpc.setText(item.getEpc());
                 txtRawData.setText(item.getRawData());
@@ -115,42 +116,45 @@ public class SimulatedMICRPanel extends BaseSimulatedPanel {
                 txtTransitNumber.setText(item.getTransitNumber());
             }
         });
-        
+
         button1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (getCallbacks() != null) {
                     MICR micr = new MICR();
                     DataEvent evt = new DataEvent(micr, 1);
                     evt.getSource();
-                    
+
                     selectedItem.setAccountNumber(txtAccountNumber.getText());
                     selectedItem.setAmount(txtAmount.getText());
                     selectedItem.setBankNumber(txtBankNumber.getText());
                     try {
-                        selectedItem.setCheckType(new Integer(txtCheckType.getText()).intValue());
+                        selectedItem.setCheckType(new Integer(txtCheckType
+                                .getText()).intValue());
+                    } catch (Exception ex) {
+                        logger
+                                .warn("Unable to set check type, not a valid integer.");
                     }
-                    catch (Exception ex) {
-                        logger.warn("Unable to set check type, not a valid integer.");
-                    }
-                    
+
                     try {
-                        selectedItem.setCountryCode(new Integer(txtCountryCode.getText()).intValue());
-                    }
-                    catch (Exception ex) {
-                        logger.warn("Unable to set country code, not a valid integer.");
+                        selectedItem.setCountryCode(new Integer(txtCountryCode
+                                .getText()).intValue());
+                    } catch (Exception ex) {
+                        logger
+                                .warn("Unable to set country code, not a valid integer.");
                     }
                     selectedItem.setEpc(txtEpc.getText());
                     selectedItem.setRawData(txtRawData.getText());
                     selectedItem.setSerialNumber(txtSerialNumber.getText());
                     selectedItem.setTransitNumber(txtTransitNumber.getText());
-                    
+
                     getDeviceCallback().setMicr(selectedItem);
                     getCallbacks().fireDataEvent(new DataEvent(evt, 1));
                 }
             }
         });
-        
-        JLabel header = new JLabel("<html>Select an item from the drop down or enter values manually.</html>");
+
+        JLabel header = new JLabel(
+                "<html>Select an item from the drop down or enter values manually.</html>");
 
         setLayout(new GridBagLayout());
 
@@ -178,14 +182,15 @@ public class SimulatedMICRPanel extends BaseSimulatedPanel {
         addToGridBag(1, 10, 1, txtTransitNumber, c, this);
         addToGridBag(0, 11, 2, button1, c, this);
     }
-    
+
     public void loadItems() {
         SAXBuilder builder = new SAXBuilder();
         Document doc = null;
         String xmlFile = "/org/jumpmind/pos/javapos/sim/SimulatedMICRService.xml";
 
         try {
-            doc = builder.build(new InputStreamReader(SimulatedMSRService.class.getResourceAsStream(xmlFile)));
+            doc = builder.build(new InputStreamReader(SimulatedMSRService.class
+                    .getResourceAsStream(xmlFile)));
             Element micr = doc.getRootElement();
             for (Object itemObj : micr.getChildren()) {
                 Element itemXML = (Element) itemObj;
@@ -201,7 +206,7 @@ public class SimulatedMICRPanel extends BaseSimulatedPanel {
                 item.setRawData(readElement(itemXML, "rawData"));
                 item.setSerialNumber(readElement(itemXML, "serialNumber"));
                 item.setTransitNumber(readElement(itemXML, "transitNumber"));
-                           
+
                 items.put(item.getLabel(), item);
             }
         } catch (Exception e) {
@@ -210,15 +215,15 @@ public class SimulatedMICRPanel extends BaseSimulatedPanel {
         }
 
     }
-    
+
     public Object[] loadItemMICRBeans() {
         Object[] val = null;
         if (items != null) {
             val = new TreeSet<String>(items.keySet()).toArray();
         }
         return val;
-    }   
-    
+    }
+
     public SimulatedMICRService getDeviceCallback() {
         return deviceCallback;
     }
@@ -226,7 +231,5 @@ public class SimulatedMICRPanel extends BaseSimulatedPanel {
     public void setDeviceCallback(SimulatedMICRService deviceCallback) {
         this.deviceCallback = deviceCallback;
     }
-    
-
 
 }

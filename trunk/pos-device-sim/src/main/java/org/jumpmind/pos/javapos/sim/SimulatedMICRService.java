@@ -5,9 +5,10 @@ import jpos.services.MICRService111;
 
 import org.jumpmind.pos.javapos.sim.beans.MICRBean;
 
-public class SimulatedMICRService extends AbstractSimulatedService implements MICRService111 {
+public class SimulatedMICRService extends AbstractSimulatedService implements
+        MICRService111 {
     private MICRBean micr;
-        
+
     @Override
     public void reset() {
         this.micr = new MICRBean();
@@ -16,7 +17,8 @@ public class SimulatedMICRService extends AbstractSimulatedService implements MI
     public void clearInputProperties() throws JposException {
     }
 
-    public void compareFirmwareVersion(String arg0, int[] arg1) throws JposException {
+    public void compareFirmwareVersion(String arg0, int[] arg1)
+            throws JposException {
     }
 
     public boolean getCapCompareFirmwareVersion() throws JposException {
@@ -131,7 +133,8 @@ public class SimulatedMICRService extends AbstractSimulatedService implements MI
     public void checkHealth(int arg0) throws JposException {
     }
 
-    public void directIO(int arg0, int[] arg1, Object arg2) throws JposException {
+    public void directIO(int arg0, int[] arg1, Object arg2)
+            throws JposException {
     }
 
     public String getCheckHealthText() throws JposException {
@@ -149,7 +152,7 @@ public class SimulatedMICRService extends AbstractSimulatedService implements MI
     public String getPhysicalDeviceName() throws JposException {
         return null;
     }
-    
+
     public MICRBean getMicr() {
         return micr;
     }

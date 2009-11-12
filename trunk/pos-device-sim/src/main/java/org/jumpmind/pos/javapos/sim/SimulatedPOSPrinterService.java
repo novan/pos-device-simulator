@@ -23,50 +23,59 @@ import org.apache.commons.logging.LogFactory;
 import org.jumpmind.pos.javapos.sim.ui.SimulatedDeviceWindow;
 import org.jumpmind.pos.javapos.sim.ui.SimulatedPOSPrinterPanel;
 
-public class SimulatedPOSPrinterService extends AbstractSimulatedService implements POSPrinterService111 {
-    static final Log logger = LogFactory.getLog(SimulatedPOSPrinterService.class);
+public class SimulatedPOSPrinterService extends AbstractSimulatedService
+        implements POSPrinterService111 {
+    static final Log logger = LogFactory
+            .getLog(SimulatedPOSPrinterService.class);
 
-    private boolean asyncMode = true;
-    private int slpLineChars;
-    private int slpLineHeight;
-    private int slpLineSpacing;
-    private int characterSet;
-    private boolean flagWhenIdle;
-    private boolean jrnLetterQuality;
-    private int jrnLineChars;
-    private int jrnLineHeight;
-    private int jrnLineSpacing;
-    private int mapMode;
-    private boolean recLetterQuality;
-    private int recLineChars;
-    private int recLineHeight;
-    private int recLineSpacing;
-    private int rotateSpecial;
-    private boolean slpLetterQuality;
-    
+    protected boolean asyncMode = true;
+    protected int slpLineChars;
+    protected int slpLineHeight;
+    protected int slpLineSpacing;
+    protected int characterSet;
+    protected boolean flagWhenIdle;
+    protected boolean jrnLetterQuality;
+    protected int jrnLineChars;
+    protected int jrnLineHeight;
+    protected int jrnLineSpacing;
+    protected int mapMode;
+    protected boolean recLetterQuality;
+    protected int recLineChars;
+    protected int recLineHeight;
+    protected int recLineSpacing;
+    protected int rotateSpecial;
+    protected boolean slpLetterQuality;
+
     @Override
     public void reset() {
     }
-    
+
     public void appendText(final int type, final String newText) {
-    	
+
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                SimulatedDeviceWindow.getInstance().getTabbedPane().setSelectedComponent(SimulatedPOSPrinterPanel.getInstance());
-                StyledDocument doc = SimulatedPOSPrinterPanel.getInstance().getTextArea().getStyledDocument();
-                Dimension d = SimulatedPOSPrinterPanel.getInstance().getTextArea().getSize();
+                SimulatedDeviceWindow.getInstance().getTabbedPane()
+                        .setSelectedComponent(
+                                SimulatedPOSPrinterPanel.getInstance());
+                StyledDocument doc = SimulatedPOSPrinterPanel.getInstance()
+                        .getTextArea().getStyledDocument();
+                Dimension d = SimulatedPOSPrinterPanel.getInstance()
+                        .getTextArea().getSize();
                 if (type == POSPrinterConst.PTR_S_RECEIPT) {
                     d.width = recLineChars;
-                }
-                else {
+                } else {
                     d.width = slpLineChars;
                 }
                 SimulatedPOSPrinterPanel.getInstance().getTextArea().setSize(d);
                 try {
-                    
-                    doc.insertString(doc.getLength(), newText, doc.getStyle("text"));
-                    SimulatedPOSPrinterPanel.getInstance().getTextArea().scrollRectToVisible(
-                            new Rectangle(0, SimulatedPOSPrinterPanel.getInstance().getTextArea().getHeight() - 2, 1, 1));
+
+                    doc.insertString(doc.getLength(), newText, doc
+                            .getStyle("text"));
+                    SimulatedPOSPrinterPanel.getInstance().getTextArea()
+                            .scrollRectToVisible(
+                                    new Rectangle(0, SimulatedPOSPrinterPanel
+                                            .getInstance().getTextArea()
+                                            .getHeight() - 2, 1, 1));
 
                 } catch (BadLocationException e) {
                     logger.error(e, e);
@@ -75,26 +84,34 @@ public class SimulatedPOSPrinterService extends AbstractSimulatedService impleme
         });
     }
 
-    public void printBarCode(int i, String s, int j, int k, int l, int i1, int j1) throws JposException {
+    public void printBarCode(int i, String s, int j, int k, int l, int i1,
+            int j1) throws JposException {
         appendText(i, s);
     }
 
-    public void printBitmap(final int i, final String image, int j, int k) throws JposException {
+    public void printBitmap(final int i, final String image, int j, int k)
+            throws JposException {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 ImageIcon icon = createImageIcon(image);
                 if (icon != null) {
                     int hint = Image.SCALE_AREA_AVERAGING;
-                    int w = SimulatedPOSPrinterPanel.getInstance().getTextArea().getWidth() - 10;
-                    int h = (int) (((double) w / (double) icon.getIconWidth()) * icon.getIconHeight());
-                    icon = new ImageIcon(icon.getImage().getScaledInstance(w, h, hint));
-                    Style def = StyleContext.getDefaultStyleContext().getStyle(StyleContext.DEFAULT_STYLE);
-                    StyledDocument doc = SimulatedPOSPrinterPanel.getInstance().getTextArea().getStyledDocument();
+                    int w = SimulatedPOSPrinterPanel.getInstance()
+                            .getTextArea().getWidth() - 10;
+                    int h = (int) (((double) w / (double) icon.getIconWidth()) * icon
+                            .getIconHeight());
+                    icon = new ImageIcon(icon.getImage().getScaledInstance(w,
+                            h, hint));
+                    Style def = StyleContext.getDefaultStyleContext().getStyle(
+                            StyleContext.DEFAULT_STYLE);
+                    StyledDocument doc = SimulatedPOSPrinterPanel.getInstance()
+                            .getTextArea().getStyledDocument();
                     Style s = doc.addStyle(image, def);
                     StyleConstants.setIcon(s, icon);
                     StyleConstants.setAlignment(s, StyleConstants.ALIGN_CENTER);
                     try {
-                        doc.insertString(doc.getLength(), " ", doc.getStyle(image));
+                        doc.insertString(doc.getLength(), " ", doc
+                                .getStyle(image));
                     } catch (BadLocationException e) {
                         logger.error(e, e);
                     }
@@ -130,7 +147,8 @@ public class SimulatedPOSPrinterService extends AbstractSimulatedService impleme
         appendText(i, s);
     }
 
-    public void printMemoryBitmap(int i, byte[] abyte0, int j, int k, int l) throws JposException {
+    public void printMemoryBitmap(int i, byte[] abyte0, int j, int k, int l)
+            throws JposException {
     }
 
     public void cutPaper(int i) throws JposException {
@@ -352,11 +370,13 @@ public class SimulatedPOSPrinterService extends AbstractSimulatedService impleme
     }
 
     public void endInsertion() throws JposException {
-        appendText(POSPrinterConst.PTR_S_RECEIPT, "\n\n-------------- end insertion --------------\n\n");
+        appendText(POSPrinterConst.PTR_S_RECEIPT,
+                "\n\n-------------- end insertion --------------\n\n");
     }
 
     public void endRemoval() throws JposException {
-        appendText(POSPrinterConst.PTR_S_RECEIPT, "\n\n-------------- end removal --------------\n\n");
+        appendText(POSPrinterConst.PTR_S_RECEIPT,
+                "\n\n-------------- end removal --------------\n\n");
     }
 
     public boolean getAsyncMode() throws JposException {
@@ -813,7 +833,8 @@ public class SimulatedPOSPrinterService extends AbstractSimulatedService impleme
         this.asyncMode = flag;
     }
 
-    public void setBitmap(int i, int j, String s, int k, int l) throws JposException {
+    public void setBitmap(int i, int j, String s, int k, int l)
+            throws JposException {
 
     }
 
@@ -918,7 +939,7 @@ public class SimulatedPOSPrinterService extends AbstractSimulatedService impleme
     }
 
     @Override
-	public void deleteInstance() throws JposException {
+    public void deleteInstance() throws JposException {
     }
 
     public boolean getCapServiceAllowManagement() throws JposException {

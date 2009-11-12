@@ -7,11 +7,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jumpmind.pos.javapos.sim.beans.MSRCardBean;
 
-public class SimulatedMSRService extends AbstractSimulatedService implements MSRService111 {
+public class SimulatedMSRService extends AbstractSimulatedService implements
+        MSRService111 {
     static final Log logger = LogFactory.getLog(SimulatedMSRService.class);
 
     private MSRCardBean selectedCard;
-    
+
     private int tracksToWrite = 2;
     private boolean transmitSentinels;
     private boolean autoDisable;
@@ -21,14 +22,14 @@ public class SimulatedMSRService extends AbstractSimulatedService implements MSR
     private boolean parseDecodeData = true;
     private int tracksToRead = 2;
 
-    
     public MSRCardBean getSelectedCard() {
         return selectedCard;
     }
+
     public void setSelectedCard(MSRCardBean selectedCard) {
         this.selectedCard = selectedCard;
     }
-    
+
     public SimulatedMSRService() {
     }
 
@@ -38,23 +39,28 @@ public class SimulatedMSRService extends AbstractSimulatedService implements MSR
     }
 
     public String getAccountNumber() throws JposException {
-        return this.selectedCard != null ? this.selectedCard.getAccountNumber() : null;
+        return this.selectedCard != null ? this.selectedCard.getAccountNumber()
+                : null;
     }
 
     public String getExpirationDate() throws JposException {
-        return this.selectedCard != null ? this.selectedCard.getExpirationDate() : null;
+        return this.selectedCard != null ? this.selectedCard
+                .getExpirationDate() : null;
     }
 
     public String getFirstName() throws JposException {
-        return this.selectedCard != null ? this.selectedCard.getFirstName() : null;
+        return this.selectedCard != null ? this.selectedCard.getFirstName()
+                : null;
     }
 
     public String getMiddleInitial() throws JposException {
-        return this.selectedCard != null ? this.selectedCard.getMiddleInitial() : null;
+        return this.selectedCard != null ? this.selectedCard.getMiddleInitial()
+                : null;
     }
 
     public String getServiceCode() throws JposException {
-        return this.selectedCard != null ? this.selectedCard.getServiceCode() : null;
+        return this.selectedCard != null ? this.selectedCard.getServiceCode()
+                : null;
     }
 
     public String getSuffix() throws JposException {
@@ -62,7 +68,8 @@ public class SimulatedMSRService extends AbstractSimulatedService implements MSR
     }
 
     public String getSurname() throws JposException {
-        return this.selectedCard != null ? this.selectedCard.getSurName() : null;
+        return this.selectedCard != null ? this.selectedCard.getSurName()
+                : null;
     }
 
     public String getTitle() throws JposException {
@@ -70,39 +77,45 @@ public class SimulatedMSRService extends AbstractSimulatedService implements MSR
     }
 
     public byte[] getTrack1Data() throws JposException {
-        return this.selectedCard != null && this.selectedCard.getTrack1Data() != null 
-            ? this.selectedCard.getTrack1Data().getBytes() 
-            : new byte[0];
+        return this.selectedCard != null
+                && this.selectedCard.getTrack1Data() != null ? this.selectedCard
+                .getTrack1Data().getBytes()
+                : new byte[0];
     }
 
     public byte[] getTrack1DiscretionaryData() throws JposException {
-        return this.selectedCard != null && this.selectedCard.getTrack1DiscretionaryData() != null 
-            ? this.selectedCard.getTrack1DiscretionaryData().getBytes() 
-            : new byte[0];
+        return this.selectedCard != null
+                && this.selectedCard.getTrack1DiscretionaryData() != null ? this.selectedCard
+                .getTrack1DiscretionaryData().getBytes()
+                : new byte[0];
     }
 
     public byte[] getTrack2Data() throws JposException {
-        return this.selectedCard != null && this.selectedCard.getTrack2Data() != null 
-            ? this.selectedCard.getTrack2Data().getBytes() 
-            : new byte[0];
+        return this.selectedCard != null
+                && this.selectedCard.getTrack2Data() != null ? this.selectedCard
+                .getTrack2Data().getBytes()
+                : new byte[0];
     }
 
     public byte[] getTrack2DiscretionaryData() throws JposException {
-        return this.selectedCard != null && this.selectedCard.getTrack2DiscretionaryData() != null 
-            ? this.selectedCard.getTrack2DiscretionaryData().getBytes() 
-            : new byte[0];
+        return this.selectedCard != null
+                && this.selectedCard.getTrack2DiscretionaryData() != null ? this.selectedCard
+                .getTrack2DiscretionaryData().getBytes()
+                : new byte[0];
     }
 
     public byte[] getTrack3Data() throws JposException {
-        return this.selectedCard != null && this.selectedCard.getTrack3Data() != null 
-            ? this.selectedCard.getTrack3Data().getBytes() 
-            : new byte[0];
+        return this.selectedCard != null
+                && this.selectedCard.getTrack3Data() != null ? this.selectedCard
+                .getTrack3Data().getBytes()
+                : new byte[0];
     }
 
     public byte[] getTrack4Data() throws JposException {
-        return this.selectedCard != null && this.selectedCard.getTrack4Data() != null 
-            ? this.selectedCard.getTrack4Data().getBytes() 
-            : new byte[0];
+        return this.selectedCard != null
+                && this.selectedCard.getTrack4Data() != null ? this.selectedCard
+                .getTrack4Data().getBytes()
+                : new byte[0];
     }
 
     public int getDataCount() throws JposException {
@@ -135,7 +148,8 @@ public class SimulatedMSRService extends AbstractSimulatedService implements MSR
 
     }
 
-    public void compareFirmwareVersion(String arg0, int[] arg1) throws JposException {
+    public void compareFirmwareVersion(String arg0, int[] arg1)
+            throws JposException {
 
     }
 
@@ -270,7 +284,8 @@ public class SimulatedMSRService extends AbstractSimulatedService implements MSR
 
     }
 
-    public void directIO(int arg0, int[] arg1, Object arg2) throws JposException {
+    public void directIO(int arg0, int[] arg1, Object arg2)
+            throws JposException {
 
     }
 
@@ -293,6 +308,7 @@ public class SimulatedMSRService extends AbstractSimulatedService implements MSR
 
         return "";
     }
+
     public boolean getCapServiceAllowManagement() throws JposException {
         return false;
     }

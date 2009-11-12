@@ -27,13 +27,13 @@ import org.jumpmind.pos.javapos.sim.SimulatedScannerService;
 
 public class SimulatedScannerPanel extends BaseSimulatedPanel {
 
-    private static final long serialVersionUID = -3371467403985283645L;
+    protected static final long serialVersionUID = -3371467403985283645L;
 
-    private static SimulatedScannerPanel me = new SimulatedScannerPanel();
-    private SimulatedScannerService deviceCallback;
-    private Map<String, String> items = new HashMap<String, String>();
-    private String selectedItem;
-    
+    protected static SimulatedScannerPanel me = new SimulatedScannerPanel();
+    protected SimulatedScannerService deviceCallback;
+    protected Map<String, String> items = new HashMap<String, String>();
+    protected String selectedItem;
+
     public SimulatedScannerService getDeviceCallback() {
         return deviceCallback;
     }
@@ -50,9 +50,9 @@ public class SimulatedScannerPanel extends BaseSimulatedPanel {
 
         final JButton button = new JButton("Scan Value In Text Box");
         final JTextField textField = new JTextField();
-        
+
         loadItems();
-        
+
         JComboBox cbItems = new JComboBox(loadScannerItemBeans());
         cbItems.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent e) {
@@ -61,16 +61,15 @@ public class SimulatedScannerPanel extends BaseSimulatedPanel {
                         JComboBox cb = (JComboBox) e.getSource();
                         String label = (String) cb.getSelectedItem();
                         String item = items.get(label);
-                        
+
                         textField.setText(item);
-                        
+
                     }
                 });
 
             }
         });
-       
-       
+
         textField.setSize(200, 20);
         textField.setPreferredSize(new Dimension(200, 20));
         textField.select(0, textField.getText().length());
@@ -86,7 +85,8 @@ public class SimulatedScannerPanel extends BaseSimulatedPanel {
                     public void run() {
                         if (deviceCallback.getCallbacks() != null) {
                             Scanner scanner = new Scanner();
-                            DataEvent evt = new DataEvent(scanner, JposConst.JPOS_SUCCESS);
+                            DataEvent evt = new DataEvent(scanner,
+                                    JposConst.JPOS_SUCCESS);
 
                             deviceCallback.setScanData(textFieldValue);
                             try {
@@ -97,7 +97,8 @@ public class SimulatedScannerPanel extends BaseSimulatedPanel {
                                 ex.printStackTrace();
                             }
 
-                            EventCallbacks callbacks = deviceCallback.getCallbacks();
+                            EventCallbacks callbacks = deviceCallback
+                                    .getCallbacks();
                             if (callbacks != null) {
                                 callbacks.fireDataEvent(evt);
                             }
@@ -119,19 +120,22 @@ public class SimulatedScannerPanel extends BaseSimulatedPanel {
         setInitialized(true);
 
     }
-    
+
     public void loadItems() {
         SAXBuilder builder = new SAXBuilder();
         Document doc = null;
         String xmlFile = "/org/jumpmind/pos/javapos/sim/SimulatedScannerService.xml";
 
         try {
-            doc = builder.build(new InputStreamReader(SimulatedScannerService.class.getResourceAsStream(xmlFile)));
+            doc = builder
+                    .build(new InputStreamReader(SimulatedScannerService.class
+                            .getResourceAsStream(xmlFile)));
             Element scanner = doc.getRootElement();
             for (Object scannerObj : scanner.getChildren()) {
                 Element itemXML = (Element) scannerObj;
-                
-                items.put(readElement(itemXML, "label"), readElement(itemXML, "id"));
+
+                items.put(readElement(itemXML, "label"), readElement(itemXML,
+                        "id"));
             }
         } catch (Exception e) {
             logger.error("Unable to preload items from " + xmlFile);
@@ -139,14 +143,13 @@ public class SimulatedScannerPanel extends BaseSimulatedPanel {
         }
 
     }
-    
+
     public Object[] loadScannerItemBeans() {
         Object[] val = null;
         if (items != null) {
             val = new TreeSet<String>(items.keySet()).toArray();
         }
         return val;
-    }   
-
+    }
 
 }

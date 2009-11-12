@@ -3,7 +3,8 @@ package org.jumpmind.pos.javapos.sim;
 import jpos.JposException;
 import jpos.services.ScannerService111;
 
-public class SimulatedScannerService extends AbstractSimulatedService implements ScannerService111 {
+public class SimulatedScannerService extends AbstractSimulatedService implements
+        ScannerService111 {
 
     public final static int DEVICE_VERSION = 1011000;
 
@@ -26,7 +27,8 @@ public class SimulatedScannerService extends AbstractSimulatedService implements
         checkIfOpen();
     }
 
-    public void compareFirmwareVersion(String arg0, int[] arg1) throws JposException {
+    public void compareFirmwareVersion(String arg0, int[] arg1)
+            throws JposException {
         checkIfOpen();
     }
 
@@ -107,7 +109,7 @@ public class SimulatedScannerService extends AbstractSimulatedService implements
 
     public byte[] getScanData() throws JposException {
         checkIfOpen();
-        byte[] data =  scanData;
+        byte[] data = scanData;
         scanData = null;
         return data;
     }
@@ -130,7 +132,8 @@ public class SimulatedScannerService extends AbstractSimulatedService implements
         this.autoDisable = autoDisable;
     }
 
-    public void setDataEventEnabled(boolean dataEventEnabled) throws JposException {
+    public void setDataEventEnabled(boolean dataEventEnabled)
+            throws JposException {
         checkIfOpen();
         this.dataEventEnabled = dataEventEnabled;
     }
@@ -146,7 +149,8 @@ public class SimulatedScannerService extends AbstractSimulatedService implements
         this.healthCheckText = "Health Check Successful!";
     }
 
-    public void directIO(int arg0, int[] arg1, Object arg2) throws JposException {
+    public void directIO(int arg0, int[] arg1, Object arg2)
+            throws JposException {
         checkIfOpen();
     }
 
@@ -161,7 +165,7 @@ public class SimulatedScannerService extends AbstractSimulatedService implements
     }
 
     @Override
-	public int getDeviceServiceVersion() throws JposException {
+    public int getDeviceServiceVersion() throws JposException {
         checkIfOpen();
         return DEVICE_VERSION;
     }
