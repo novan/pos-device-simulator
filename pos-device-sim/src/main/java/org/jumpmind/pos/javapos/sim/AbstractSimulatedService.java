@@ -44,21 +44,25 @@ public abstract class AbstractSimulatedService {
 
     protected void checkIfOpen() throws JposException {
         if (!open)
-            throw new JposException(JposConst.JPOS_E_CLOSED, "Service is not open.");
+            throw new JposException(JposConst.JPOS_E_CLOSED,
+                    "Service is not open.");
     }
 
     protected void checkIfClaimed() throws JposException {
         if (!claimed)
-            throw new JposException(JposConst.JPOS_E_NOTCLAIMED, "Device is not claimed.");
+            throw new JposException(JposConst.JPOS_E_NOTCLAIMED,
+                    "Device is not claimed.");
     }
 
     public void deleteInstance() throws JposException {
         checkIfOpen();
     }
 
-    public void open(String s, EventCallbacks eventcallbacks) throws JposException {
+    public void open(String s, EventCallbacks eventcallbacks)
+            throws JposException {
         if (open) {
-            throw new JposException(JposConst.JPOS_E_ILLEGAL, "Service is already open.");
+            throw new JposException(JposConst.JPOS_E_ILLEGAL,
+                    "Service is already open.");
         }
         this.open = true;
         this.state = JposConst.JPOS_S_IDLE;
@@ -89,7 +93,7 @@ public abstract class AbstractSimulatedService {
 
     public void release() throws JposException {
         checkIfOpen();
-        checkIfClaimed();       
+        checkIfClaimed();
         this.claimed = false;
         this.enabled = false;
         this.state = JposConst.JPOS_S_IDLE;
@@ -112,26 +116,30 @@ public abstract class AbstractSimulatedService {
         checkIfClaimed();
         this.enabled = enabled;
 
-        
         if (this instanceof SimulatedMSRService) {
             SwingUtilities.invokeLater(new Runnable() {
                 public void run() {
                     if (!SimulatedMSRPanel.getInstance().isInitialized()) {
                         SimulatedMSRPanel.getInstance().init();
                     }
-                    SimulatedDeviceWindow.getInstance().getTabbedPane().setSelectedComponent(SimulatedMSRPanel.getInstance());
+                    SimulatedDeviceWindow.getInstance().getTabbedPane()
+                            .setSelectedComponent(
+                                    SimulatedMSRPanel.getInstance());
                 }
             });
             SimulatedMSRPanel.getInstance().setCallbacks(this.callbacks);
-            SimulatedMSRPanel.getInstance().setDeviceCallback((SimulatedMSRService) this);
-            
+            SimulatedMSRPanel.getInstance().setDeviceCallback(
+                    (SimulatedMSRService) this);
+
         } else if (this instanceof SimulatedPOSPrinterService) {
             SwingUtilities.invokeLater(new Runnable() {
                 public void run() {
                     if (!SimulatedPOSPrinterPanel.getInstance().isInitialized()) {
                         SimulatedPOSPrinterPanel.getInstance().init();
                     }
-                    SimulatedDeviceWindow.getInstance().getTabbedPane().setSelectedComponent(SimulatedPOSPrinterPanel.getInstance());
+                    SimulatedDeviceWindow.getInstance().getTabbedPane()
+                            .setSelectedComponent(
+                                    SimulatedPOSPrinterPanel.getInstance());
                 }
             });
 
@@ -141,60 +149,79 @@ public abstract class AbstractSimulatedService {
                     if (!SimulatedCashDrawerPanel.getInstance().isInitialized()) {
                         SimulatedCashDrawerPanel.getInstance().init();
                     }
-                    SimulatedDeviceWindow.getInstance().getTabbedPane().setSelectedComponent(SimulatedCashDrawerPanel.getInstance());
+                    SimulatedDeviceWindow.getInstance().getTabbedPane()
+                            .setSelectedComponent(
+                                    SimulatedCashDrawerPanel.getInstance());
                 }
             });
             SimulatedCashDrawerPanel.getInstance().setCallbacks(this.callbacks);
-            SimulatedCashDrawerPanel.getInstance().setDeviceCallback((SimulatedCashDrawerService) this);
-            
+            SimulatedCashDrawerPanel.getInstance().setDeviceCallback(
+                    (SimulatedCashDrawerService) this);
+
         } else if (this instanceof SimulatedSignatureCaptureService) {
             SwingUtilities.invokeLater(new Runnable() {
                 public void run() {
-                    if (!SimulatedSignatureCapturePanel.getInstance().isInitialized()) {
+                    if (!SimulatedSignatureCapturePanel.getInstance()
+                            .isInitialized()) {
                         SimulatedSignatureCapturePanel.getInstance().init();
                     }
-                    SimulatedDeviceWindow.getInstance().getTabbedPane().setSelectedComponent(SimulatedSignatureCapturePanel.getInstance());
+                    SimulatedDeviceWindow.getInstance().getTabbedPane()
+                            .setSelectedComponent(
+                                    SimulatedSignatureCapturePanel
+                                            .getInstance());
                 }
             });
-            SimulatedSignatureCapturePanel.getInstance().setCallbacks(this.callbacks);
-            SimulatedSignatureCapturePanel.getInstance().setDeviceCallback((SimulatedSignatureCaptureService) this);
-            
+            SimulatedSignatureCapturePanel.getInstance().setCallbacks(
+                    this.callbacks);
+            SimulatedSignatureCapturePanel.getInstance().setDeviceCallback(
+                    (SimulatedSignatureCaptureService) this);
+
         } else if (this instanceof SimulatedMICRService) {
             SwingUtilities.invokeLater(new Runnable() {
                 public void run() {
                     if (!SimulatedMICRPanel.getInstance().isInitialized()) {
                         SimulatedMICRPanel.getInstance().init();
                     }
-                    SimulatedDeviceWindow.getInstance().getTabbedPane().setSelectedComponent(SimulatedMICRPanel.getInstance());
+                    SimulatedDeviceWindow.getInstance().getTabbedPane()
+                            .setSelectedComponent(
+                                    SimulatedMICRPanel.getInstance());
                 }
             });
             SimulatedMICRPanel.getInstance().setCallbacks(this.callbacks);
-            SimulatedMICRPanel.getInstance().setDeviceCallback((SimulatedMICRService) this);
+            SimulatedMICRPanel.getInstance().setDeviceCallback(
+                    (SimulatedMICRService) this);
         } else if (this instanceof SimulatedLineDisplayService) {
             SwingUtilities.invokeLater(new Runnable() {
                 public void run() {
-                    if (!SimulatedLineDisplayPanel.getInstance().isInitialized()) {
+                    if (!SimulatedLineDisplayPanel.getInstance()
+                            .isInitialized()) {
                         SimulatedLineDisplayPanel.getInstance().init();
                     }
                     SimulatedDeviceWindow.getInstance().getTabbedPane()
-                            .setSelectedIndex(SimulatedDeviceWindow.TAB_LINE_DISPLAY);
+                            .setSelectedIndex(
+                                    SimulatedDeviceWindow.TAB_LINE_DISPLAY);
                 }
             });
-            SimulatedLineDisplayPanel.getInstance().setCallbacks(this.callbacks);
-            SimulatedLineDisplayPanel.getInstance().setDeviceCallback((SimulatedLineDisplayService) this);
+            SimulatedLineDisplayPanel.getInstance()
+                    .setCallbacks(this.callbacks);
+            SimulatedLineDisplayPanel.getInstance().setDeviceCallback(
+                    (SimulatedLineDisplayService) this);
         } else if (this instanceof SimulatedScannerService) {
             SwingUtilities.invokeLater(new Runnable() {
                 public void run() {
                     if (!SimulatedScannerPanel.getInstance().isInitialized()) {
                         SimulatedScannerPanel.getInstance().init();
-                        SimulatedDeviceWindow.getInstance().getTabbedPane().setSelectedIndex(SimulatedDeviceWindow.TAB_SCANNER);
+                        SimulatedDeviceWindow.getInstance().getTabbedPane()
+                                .setSelectedIndex(
+                                        SimulatedDeviceWindow.TAB_SCANNER);
                     }
                 }
             });
-            
+
             SimulatedScannerPanel.getInstance().setCallbacks(this.callbacks);
-            SimulatedScannerPanel.getInstance().setDeviceCallback((SimulatedScannerService) this);
-            
+            SimulatedScannerPanel.getInstance().setDeviceCallback(
+                    (SimulatedScannerService) this);
+
         }
     }
 
@@ -231,7 +258,8 @@ public abstract class AbstractSimulatedService {
         this.callbacks = callbacks;
     }
 
-    public void addToGridBag(int x, int y, int colspan, Component comp, GridBagConstraints c, Container container) {
+    public void addToGridBag(int x, int y, int colspan, Component comp,
+            GridBagConstraints c, Container container) {
         c.fill = GridBagConstraints.HORIZONTAL;
         c.weightx = 0.5;
         c.gridx = x;

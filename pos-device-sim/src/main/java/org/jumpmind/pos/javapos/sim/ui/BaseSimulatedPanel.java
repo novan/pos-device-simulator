@@ -6,21 +6,22 @@ import java.awt.GridBagConstraints;
 
 import javax.swing.JPanel;
 
+import jpos.services.EventCallbacks;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jdom.Element;
 
-import jpos.services.EventCallbacks;
-
 public class BaseSimulatedPanel extends JPanel {
-    
+
     final Log logger = LogFactory.getLog(getClass());
     private static final long serialVersionUID = 1L;
     private boolean initialized;
     private EventCallbacks callbacks;
 
-    public void addToGridBag(int x, int y, int colspan, Component comp, GridBagConstraints c, Container container) {
+    public void addToGridBag(int x, int y, int colspan, Component comp,
+            GridBagConstraints c, Container container) {
         c.fill = GridBagConstraints.HORIZONTAL;
         c.weightx = 0.5;
         c.gridx = x;
@@ -45,9 +46,11 @@ public class BaseSimulatedPanel extends JPanel {
                 String str = e.getChild(tag).getValue();
                 if (!StringUtils.isBlank(str)) {
                     val = new Integer(str).intValue();
-                } 
+                }
             } catch (Exception ex) {
-                logger.error("Unable to read int  value from XML, was not an integer for tag " + tag);
+                logger
+                        .error("Unable to read int  value from XML, was not an integer for tag "
+                                + tag);
             }
         }
         return val;

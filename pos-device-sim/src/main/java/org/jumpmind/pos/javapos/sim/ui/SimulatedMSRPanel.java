@@ -26,35 +26,35 @@ import org.jumpmind.pos.javapos.sim.SimulatedMSRService;
 import org.jumpmind.pos.javapos.sim.beans.MSRCardBean;
 
 public class SimulatedMSRPanel extends BaseSimulatedPanel {
-    
+
     private static final long serialVersionUID = 1L;
     private static SimulatedMSRPanel me;
     private Map<String, MSRCardBean> cards = new HashMap<String, MSRCardBean>();
     private MSRCardBean selectedCard;
-    private SimulatedMSRService deviceCallback;   
+    private SimulatedMSRService deviceCallback;
 
     private SimulatedMSRPanel() {
     }
-    
+
     public static SimulatedMSRPanel getInstance() {
         if (me == null) {
             me = new SimulatedMSRPanel();
         }
         return me;
     }
-    
+
     public void init() {
         setInitialized(true);
-        
+
         this.selectedCard = new MSRCardBean();
         this.setFocusable(false);
         this.setBackground(Color.LIGHT_GRAY);
-        
+
         JButton button1 = new JButton("Swipe Card");
         button1.setSize(200, 20);
 
         loadCards();
-        
+
         final JLabel lblTrack1Data = new JLabel("Track1 Data : ");
         final JTextField txtTrack1Data = new JTextField("");
         final JLabel lblTrack2Data = new JLabel("Track2 Data : ");
@@ -94,7 +94,7 @@ public class SimulatedMSRPanel extends BaseSimulatedPanel {
                         JComboBox cb = (JComboBox) e.getSource();
                         String label = (String) cb.getSelectedItem();
                         MSRCardBean card = cards.get(label);
-                        
+
                         txtTrack1Data.setText(card.getTrack1Data());
                         txtTrack2Data.setText(card.getTrack2Data());
                         txtTrack3Data.setText(card.getTrack3Data());
@@ -107,13 +107,16 @@ public class SimulatedMSRPanel extends BaseSimulatedPanel {
                         txtSurname.setText(card.getSurName());
                         txtSuffix.setText(card.getSuffix());
                         txtServiceCode.setText(card.getServiceCode());
-                        txtTrack1DiscData.setText(card.getTrack1DiscretionaryData());
-                        txtTrack2DiscData.setText(card.getTrack2DiscretionaryData());
+                        txtTrack1DiscData.setText(card
+                                .getTrack1DiscretionaryData());
+                        txtTrack2DiscData.setText(card
+                                .getTrack2DiscretionaryData());
                         try {
-                            txtDataCount.setText(new Integer(card.getDataCount()).toString());
-                        }
-                        catch (Exception ex) {
-                            logger.warn("Unable to set data count, not a valid integer.");
+                            txtDataCount.setText(new Integer(card
+                                    .getDataCount()).toString());
+                        } catch (Exception ex) {
+                            logger
+                                    .warn("Unable to set data count, not a valid integer.");
                         }
                     }
                 });
@@ -129,28 +132,36 @@ public class SimulatedMSRPanel extends BaseSimulatedPanel {
                             MSR msr = new MSR();
                             DataEvent evt = new DataEvent(msr, 1);
                             evt.getSource();
-        
-                            
+
                             selectedCard.setTrack1Data(txtTrack1Data.getText());
                             selectedCard.setTrack2Data(txtTrack2Data.getText());
                             selectedCard.setTrack3Data(txtTrack3Data.getText());
                             selectedCard.setTrack4Data(txtTrack4Data.getText());
-        
-                            selectedCard.setAccountNumber(txtAccountNumber.getText());
-                            selectedCard.setExpirationDate(txtExpirationDate.getText());
+
+                            selectedCard.setAccountNumber(txtAccountNumber
+                                    .getText());
+                            selectedCard.setExpirationDate(txtExpirationDate
+                                    .getText());
                             selectedCard.setTitle(txtTitle.getText());
                             selectedCard.setFirstName(txtFirstName.getText());
-                            selectedCard.setMiddleInitial(txtMiddleInitial.getText());
+                            selectedCard.setMiddleInitial(txtMiddleInitial
+                                    .getText());
                             selectedCard.setSurName(txtSurname.getText());
                             selectedCard.setSuffix(txtSuffix.getText());
-                            selectedCard.setServiceCode(txtServiceCode.getText());
-                            selectedCard.setTrack1DiscretionaryData(txtTrack1DiscData.getText());
-                            selectedCard.setTrack2DiscretionaryData(txtTrack2DiscData.getText());
+                            selectedCard.setServiceCode(txtServiceCode
+                                    .getText());
+                            selectedCard
+                                    .setTrack1DiscretionaryData(txtTrack1DiscData
+                                            .getText());
+                            selectedCard
+                                    .setTrack2DiscretionaryData(txtTrack2DiscData
+                                            .getText());
                             try {
-                                selectedCard.setDataCount(new Integer(txtDataCount.getText()).intValue());
+                                selectedCard.setDataCount(new Integer(
+                                        txtDataCount.getText()).intValue());
                             } catch (Exception ex) {
                             }
-        
+
                             getDeviceCallback().setSelectedCard(selectedCard);
                             getCallbacks().fireDataEvent(new DataEvent(evt, 1));
                         }
@@ -159,7 +170,8 @@ public class SimulatedMSRPanel extends BaseSimulatedPanel {
             }
         });
 
-        JLabel header = new JLabel("<html>Select a card from the drop down or enter values manually.</html>");
+        JLabel header = new JLabel(
+                "<html>Select a card from the drop down or enter values manually.</html>");
 
         setLayout(new GridBagLayout());
 
@@ -199,14 +211,15 @@ public class SimulatedMSRPanel extends BaseSimulatedPanel {
         addToGridBag(1, 16, 1, txtDataCount, c, this);
         addToGridBag(0, 17, 2, button1, c, this);
     }
-    
+
     public void loadCards() {
         SAXBuilder builder = new SAXBuilder();
         Document doc = null;
         String xmlFile = "/org/jumpmind/pos/javapos/sim/SimulatedMSRService.xml";
 
         try {
-            doc = builder.build(new InputStreamReader(SimulatedMSRService.class.getResourceAsStream(xmlFile)));
+            doc = builder.build(new InputStreamReader(SimulatedMSRService.class
+                    .getResourceAsStream(xmlFile)));
             Element msr = doc.getRootElement();
             for (Object cardObj : msr.getChildren()) {
                 Element cardXML = (Element) cardObj;
@@ -225,8 +238,10 @@ public class SimulatedMSRPanel extends BaseSimulatedPanel {
                 card.setSurName(readElement(cardXML, "surName"));
                 card.setSuffix(readElement(cardXML, "suffix"));
                 card.setServiceCode(readElement(cardXML, "serviceCode"));
-                card.setTrack1DiscretionaryData(readElement(cardXML, "track1DiscretionaryData"));
-                card.setTrack2DiscretionaryData(readElement(cardXML, "track2DiscretionaryData"));
+                card.setTrack1DiscretionaryData(readElement(cardXML,
+                        "track1DiscretionaryData"));
+                card.setTrack2DiscretionaryData(readElement(cardXML,
+                        "track2DiscretionaryData"));
                 card.setDataCount(readElementInt(cardXML, "dataCount"));
 
                 cards.put(card.getLabel(), card);
@@ -237,14 +252,14 @@ public class SimulatedMSRPanel extends BaseSimulatedPanel {
         }
 
     }
-    
+
     public Object[] loadMSRCardBeans() {
         Object[] val = null;
         if (cards != null) {
             val = new TreeSet<String>(cards.keySet()).toArray();
         }
         return val;
-    }   
+    }
 
     public SimulatedMSRService getDeviceCallback() {
         return deviceCallback;

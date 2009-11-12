@@ -11,24 +11,31 @@ import jpos.services.LineDisplayService111;
 
 import org.jumpmind.pos.javapos.sim.ui.SimulatedDeviceWindow;
 import org.jumpmind.pos.javapos.sim.ui.SimulatedLineDisplayPanel;
-import org.jumpmind.pos.javapos.sim.ui.SimulatedPOSPrinterPanel;
 
-public class SimulatedLineDisplayService extends AbstractSimulatedService implements LineDisplayService111 {
+public class SimulatedLineDisplayService extends AbstractSimulatedService
+        implements LineDisplayService111 {
 
     @Override
     public void reset() {
     }
-    
+
     public void appendText(final String newText) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                SimulatedDeviceWindow.getInstance().getTabbedPane().setSelectedComponent(SimulatedLineDisplayPanel.getInstance());
+                SimulatedDeviceWindow.getInstance().getTabbedPane()
+                        .setSelectedComponent(
+                                SimulatedLineDisplayPanel.getInstance());
 
-                StyledDocument doc = SimulatedLineDisplayPanel.getInstance().getTextArea().getStyledDocument();
+                StyledDocument doc = SimulatedLineDisplayPanel.getInstance()
+                        .getTextArea().getStyledDocument();
                 try {
-                    doc.insertString(doc.getLength(), newText, doc.getStyle("text"));
-                    SimulatedLineDisplayPanel.getInstance().getTextArea().scrollRectToVisible(
-                            new Rectangle(0, SimulatedLineDisplayPanel.getInstance().getTextArea().getHeight() - 2, 1, 1));
+                    doc.insertString(doc.getLength(), newText, doc
+                            .getStyle("text"));
+                    SimulatedLineDisplayPanel.getInstance().getTextArea()
+                            .scrollRectToVisible(
+                                    new Rectangle(0, SimulatedLineDisplayPanel
+                                            .getInstance().getTextArea()
+                                            .getHeight() - 2, 1, 1));
 
                 } catch (BadLocationException e) {
                     logger.error(e, e);
@@ -68,7 +75,8 @@ public class SimulatedLineDisplayService extends AbstractSimulatedService implem
     public void updateStatistics(String s) throws JposException {
     }
 
-    public void displayBitmap(String s, int i, int j, int k) throws JposException {
+    public void displayBitmap(String s, int i, int j, int k)
+            throws JposException {
     }
 
     public boolean getCapBitmap() throws JposException {
@@ -103,7 +111,8 @@ public class SimulatedLineDisplayService extends AbstractSimulatedService implem
         return "";
     }
 
-    public void setBitmap(int i, String s, int j, int k, int l) throws JposException {
+    public void setBitmap(int i, String s, int j, int k, int l)
+            throws JposException {
     }
 
     public void setMapCharacterSet(boolean flag) throws JposException {
@@ -179,7 +188,8 @@ public class SimulatedLineDisplayService extends AbstractSimulatedService implem
         SimulatedLineDisplayPanel.getInstance().getTextArea().setText("");
     }
 
-    public void createWindow(int i, int j, int k, int l, int i1, int j1) throws JposException {
+    public void createWindow(int i, int j, int k, int l, int i1, int j1)
+            throws JposException {
     }
 
     public void destroyWindow() throws JposException {
@@ -189,7 +199,8 @@ public class SimulatedLineDisplayService extends AbstractSimulatedService implem
         appendText(s);
     }
 
-    public void displayTextAt(int i, int j, String s, int k) throws JposException {
+    public void displayTextAt(int i, int j, String s, int k)
+            throws JposException {
         appendText("\n" + s);
     }
 

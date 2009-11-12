@@ -21,33 +21,35 @@ public class SimulatedPOSPrinterPanel extends BaseSimulatedPanel {
 
     protected SimulatedPOSPrinterPanel() {
     }
-    
+
     public static SimulatedPOSPrinterPanel getInstance() {
         if (me == null) {
             me = new SimulatedPOSPrinterPanel();
         }
         return me;
     }
-    
+
     public void init() {
         setInitialized(true);
-        
+
         this.setFocusable(false);
         textArea = new JTextPane();
         textArea.setEditable(false);
-        
+
         StyledDocument doc = textArea.getStyledDocument();
-        Style def = StyleContext.getDefaultStyleContext().getStyle(StyleContext.DEFAULT_STYLE);
+        Style def = StyleContext.getDefaultStyleContext().getStyle(
+                StyleContext.DEFAULT_STYLE);
         Style s = doc.addStyle("text", def);
         StyleConstants.setFontFamily(s, "Monospaced");
 
-        JScrollPane scrollPane = new JScrollPane(textArea, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+        JScrollPane scrollPane = new JScrollPane(textArea,
+                ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 
         setLayout(new BorderLayout());
         this.add(scrollPane, BorderLayout.CENTER);
     }
-    
+
     public JTextPane getTextArea() {
         return textArea;
     }

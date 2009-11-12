@@ -2,16 +2,17 @@ package org.jumpmind.pos.javapos.sim;
 
 import java.awt.Point;
 
-import org.jumpmind.pos.javapos.sim.beans.SignatureCaptureBean;
-import org.jumpmind.pos.javapos.sim.ui.SimulatedSignatureCapturePanel;
-
 import jpos.JposException;
 import jpos.services.SignatureCaptureService111;
 
-public class SimulatedSignatureCaptureService extends AbstractSimulatedService implements SignatureCaptureService111 {
-    
+import org.jumpmind.pos.javapos.sim.beans.SignatureCaptureBean;
+import org.jumpmind.pos.javapos.sim.ui.SimulatedSignatureCapturePanel;
+
+public class SimulatedSignatureCaptureService extends AbstractSimulatedService
+        implements SignatureCaptureService111 {
+
     private SignatureCaptureBean signature;
-    
+
     @Override
     public void reset() {
     }
@@ -61,7 +62,7 @@ public class SimulatedSignatureCaptureService extends AbstractSimulatedService i
     public void beginCapture(String s) throws JposException {
         this.signature = new SignatureCaptureBean();
         SimulatedSignatureCapturePanel.getInstance();
-		SimulatedSignatureCapturePanel.clear();
+        SimulatedSignatureCapturePanel.clear();
     }
 
     public void clearInput() throws JposException {
@@ -145,7 +146,7 @@ public class SimulatedSignatureCaptureService extends AbstractSimulatedService i
     public String getPhysicalDeviceName() throws JposException {
         return "SimulatedSignatureCaptureService";
     }
-    
+
     public SignatureCaptureBean getSignature() {
         return signature;
     }
