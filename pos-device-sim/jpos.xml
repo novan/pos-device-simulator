@@ -4,10 +4,17 @@
 <JposEntries>
 
    <JposEntry logicalName="SimulatedLineDisplay">
-        <creation serviceClass="org.jumpmind.pos.javapos.sim.SimulatedLineDisplaySevice"/>
+        <creation serviceClass="org.jumpmind.pos.javapos.sim.SimulatedLineDisplayService"/>
         <vendor name="JumpMind, Inc" url="http://www.jumpmind.com"/>
-        <jpos category="LineDisplay" version="1.5"/>
-        <product description="Simulated Line Display JavaPOS" name="Simulated LineDisplay Service for JavaPOS(TM) Standard" url="http://www.javapos.com"/>        
+        <jpos category="LineDisplay" version="1.11"/>
+        <product description="Simulated Line Display" name="Simulated LineDisplay Service for JavaPOS(TM) Standard" url="http://www.javapos.com"/>        
+    </JposEntry> 
+    
+   <JposEntry logicalName="SimulatedMSR">
+        <creation serviceClass="org.jumpmind.pos.javapos.sim.SimulatedMSRService"/>
+        <vendor name="JumpMind, Inc" url="http://www.jumpmind.com"/>
+        <jpos category="MSR" version="1.11"/>
+        <product description="Simulated MSR" name="Simulated MSR Service for JavaPOS(TM) Standard" url="http://www.javapos.com"/>        
     </JposEntry> 
     
 </JposEntries>
