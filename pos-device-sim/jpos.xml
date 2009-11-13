@@ -3,14 +3,14 @@
                              "jpos/res/jcl.dtd">
 <JposEntries>
 
-   <JposEntry logicalName="SimulatedLineDisplay">
+   <JposEntry logicalName="defaultLineDisplay">
         <creation serviceClass="org.jumpmind.pos.javapos.sim.SimulatedLineDisplayService"/>
         <vendor name="JumpMind, Inc" url="http://www.jumpmind.com"/>
         <jpos category="LineDisplay" version="1.11"/>
         <product description="Simulated Line Display" name="Simulated LineDisplay Service for JavaPOS(TM) Standard" url="http://www.javapos.com"/>        
     </JposEntry> 
     
-   <JposEntry logicalName="SimulatedMSR">
+   <JposEntry logicalName="defaultMSR">
         <creation serviceClass="org.jumpmind.pos.javapos.sim.SimulatedMSRService"/>
         <vendor name="JumpMind, Inc" url="http://www.jumpmind.com"/>
         <jpos category="MSR" version="1.11"/>
