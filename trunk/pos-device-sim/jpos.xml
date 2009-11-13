@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE JposEntries PUBLIC "-//JavaPOS//DTD//EN"
+                             "jpos/res/jcl.dtd">
+<JposEntries>
+
+   <JposEntry logicalName="SimulatedLineDisplay">
+        <creation serviceClass="org.jumpmind.pos.javapos.sim.SimulatedLineDisplaySevice"/>
+        <vendor name="JumpMind, Inc" url="http://www.jumpmind.com"/>
+        <jpos category="LineDisplay" version="1.5"/>
+        <product description="Simulated Line Display JavaPOS" name="Simulated LineDisplay Service for JavaPOS(TM) Standard" url="http://www.javapos.com"/>        
+    </JposEntry> 
+    
+</JposEntries>
