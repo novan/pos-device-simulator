@@ -4,13 +4,13 @@
 <JposEntries>
 
    <JposEntry logicalName="defaultLineDisplay">
-        <creation serviceClass="org.jumpmind.pos.javapos.sim.SimulatedLineDisplayService"/>
+        <creation factoryClass="org.jumpmind.pos.javapos.sim.SimulatedServiceInstanceFactory" serviceClass="org.jumpmind.pos.javapos.sim.SimulatedLineDisplayService"/>
         <vendor name="JumpMind, Inc" url="http://www.jumpmind.com"/>
         <jpos category="LineDisplay" version="1.11"/>
         <product description="Simulated Line Display" name="Simulated LineDisplay Service for JavaPOS(TM) Standard" url="http://www.javapos.com"/>        
     </JposEntry> 
     
-   <JposEntry logicalName="defaultMSR">
+   <JposEntry factoryClass="org.jumpmind.pos.javapos.sim.SimulatedServiceInstanceFactory" logicalName="defaultMSR">
         <creation serviceClass="org.jumpmind.pos.javapos.sim.SimulatedMSRService"/>
         <vendor name="JumpMind, Inc" url="http://www.jumpmind.com"/>
         <jpos category="MSR" version="1.11"/>
