@@ -18,9 +18,7 @@
       <menu submenu="POS Device Sim"/>
     </shortcut>
   </information>
-  <security>
-      <all-permissions/>
-  </security>
+
   <resources>
     <j2se version="1.5+"/>    
     <jar href="http://pos-device-simulator.googlecode.com/files/pos-device-sim.jar"/>
