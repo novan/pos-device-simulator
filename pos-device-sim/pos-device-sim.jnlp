@@ -2,7 +2,7 @@
 <!-- JNLP File for POS Device Sim Application -->
 <jnlp
   spec="1.5+"
-  codebase="http://pos-device-simulator.googlecode.com/svn/trunk/"
+  codebase="http://pos-device-simulator.googlecode.com/svn/trunk/pos-device-sim/"
   href="pos-device-sim.jnlp">
   <information>
     <title>POS Device Sim Application</title>
