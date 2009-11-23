@@ -20,6 +20,9 @@
     <jar href="http://pos-device-simulator.googlecode.com/svn/trunk/pos-device-sim/maven/repository/jpos/postest/110/postest-110.jar"/>
     <jar href="http://pos-device-simulator.googlecode.com/svn/trunk/pos-device-sim/maven/repository/jpos/jpos/113/jpos-113.jar"/>    
     <jar href="http://pos-device-simulator.googlecode.com/svn/trunk/pos-device-sim/maven/repository/xerces/xerces/1.4.4/xerces-1.4.4.jar"/>  
+    <jar href="http://pos-device-simulator.googlecode.com/svn/trunk/pos-device-sim/maven/repository/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar"/> 
+    <jar href="http://pos-device-simulator.googlecode.com/svn/trunk/pos-device-sim/maven/repository/commons-lang/commons-lang/2.3/commons-lang-2.3.jar"/> 
+    <jar href="http://pos-device-simulator.googlecode.com/svn/trunk/pos-device-sim/maven/repository/org/jdom/jdom/1.1/jdom-1.1.jar"/> 
   </resources>
   <application-desc main-class="com.jpos.POStest.POStest"/>
 </jnlp> 
