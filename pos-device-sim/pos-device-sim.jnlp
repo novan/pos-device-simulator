@@ -16,6 +16,7 @@
   <resources>
     <j2se version="1.5+"/>    
     <jar href="http://pos-device-simulator.googlecode.com/files/pos-device-sim.jar"/>
+    <jar href="http://pos-device-simulator.googlecode.com/files/pos-device-sim-jws.jar"/>
     <jar href="http://pos-device-simulator.googlecode.com/svn/trunk/pos-device-sim/maven/repository/jpos/postest/110/postest-110.jar"/>
     <jar href="http://pos-device-simulator.googlecode.com/svn/trunk/pos-device-sim/maven/repository/jpos/jpos/113/jpos-113.jar"/>    
   </resources>
