@@ -12,13 +12,10 @@
     <description kind="short">Allows a POS application to run without the need for actual devices attached.</description>
     <icon href="images/swingset2.jpg"/>
     <icon kind="splash" href="http://code.google.com/p/pos-device-simulator/logo?logo_id=1258983316"/>
-    <offline-allowed/> 
-    <shortcut online="false">
-      <desktop/>
-      <menu submenu="POS Device Sim"/>
-    </shortcut>
   </information>
-
+<security>
+<j2ee-application-client-permissions/>
+</security>
   <resources>
     <j2se version="1.5+"/>    
     <jar href="http://pos-device-simulator.googlecode.com/files/pos-device-sim.jar"/>
