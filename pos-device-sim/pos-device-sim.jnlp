@@ -14,8 +14,8 @@
     <icon kind="splash" href="http://code.google.com/p/pos-device-simulator/logo?logo_id=1258983316"/>
   </information>
 <security>
-<j2ee-application-client-permissions/>
-</security>
+      <all-permissions/>
+  </security> 
   <resources>
     <j2se version="1.5+"/>    
     <jar href="http://pos-device-simulator.googlecode.com/files/pos-device-sim.jar"/>
