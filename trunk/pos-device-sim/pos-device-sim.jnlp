@@ -6,6 +6,7 @@
   href="pos-device-sim.jnlp">
   <information>
     <title>POS Device Sim Application</title>
+    <vendor>Jumpmind, Inc.</vendor>   
     <homepage href="http://code.google.com/p/pos-device-simulator/"/>
     <description>Point of Sale device simulator</description>
     <description kind="short">Allows a POS application to run without the need for actual devices attached.</description>
@@ -21,8 +22,10 @@
       <all-permissions/>
   </security>
   <resources>
-    <j2se version="1.5+"/>
-    <jar href="maven/repository/jpos/postest/110/postest-110.jar"/>
+    <j2se version="1.5+"/>    
+    <jar href="http://code.google.com/p/pos-device-simulator/downloads/list/pos-device-sim.jar"/>
+    <jar href="http://pos-device-simulator.googlecode.com/svn/trunk/pos-device-sim/maven/repository/jpos/postest/110/postest-110.jar"/>
+    <jar href="http://pos-device-simulator.googlecode.com/svn/trunk/pos-device-sim/maven/repository/jpos/jpos/113/jpos-113.jar"/>    
   </resources>
   <application-desc main-class="com.jpos.POStest.POStest"/>
 </jnlp> 
