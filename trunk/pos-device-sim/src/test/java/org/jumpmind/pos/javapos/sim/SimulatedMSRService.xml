@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<msr>
+	<card>
+        <label>Select Card</label>
+    </card>
+    <card>
+        <label>Test Card 1</label>
+        <track1Data>trackdata1111</track1Data>
+        <track2Data>trackdata2222</track2Data>
+        <track3Data>trackdata3333</track3Data>
+        <track4Data>trackdata4444</track4Data>
+        <accountNumber>123456789</accountNumber>
+        <expirationDate></expirationDate>
+        <title>title</title>
+        <firstName>first</firstName>
+        <middleInitial>m</middleInitial>
+        <surName>mr.</surName>
+        <suffix>jr.</suffix>
+        <serviceCode>01</serviceCode>
+        <track1DiscretionaryData></track1DiscretionaryData>
+        <track2DiscretionaryData></track2DiscretionaryData>
+        <dataCount>1</dataCount>
+    </card>
+    <card>
+        <label>Test Card 2</label>
+        <track1Data>trackdata1111</track1Data>
+        <track2Data>trackdata2222</track2Data>
+        <track3Data>trackdata3333</track3Data>
+        <track4Data>trackdata4444</track4Data>
+        <accountNumber>123456789</accountNumber>
+        <expirationDate></expirationDate>
+        <title>title</title>
+        <firstName>first</firstName>
+        <middleInitial>m</middleInitial>
+        <surName>mr.</surName>
+        <suffix>jr.</suffix>
+        <serviceCode>01</serviceCode>
+        <track1DiscretionaryData></track1DiscretionaryData>
+        <track2DiscretionaryData></track2DiscretionaryData>
+        <dataCount>1</dataCount>
+    </card>
+</msr>
