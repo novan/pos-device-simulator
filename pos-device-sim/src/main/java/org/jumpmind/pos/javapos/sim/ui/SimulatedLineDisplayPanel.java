@@ -84,7 +84,7 @@ public class SimulatedLineDisplayPanel extends BaseSimulatedPanel {
         btnNo.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (getCallbacks() != null) {
-                    String confirmMessage = "XEVT<FS>2<FS>0<FS>0<FS>";
+                    String confirmMessage = "XEVT<FS>2<FS>2<FS>0<FS>CONFIRM";
 
                     DirectIOEvent evt = new DirectIOEvent(new LineDisplay(), 1,
                             1, confirmMessage.getBytes());
