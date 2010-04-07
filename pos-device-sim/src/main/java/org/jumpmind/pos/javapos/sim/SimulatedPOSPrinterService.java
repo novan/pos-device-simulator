@@ -5,6 +5,8 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.io.File;
 import java.net.MalformedURLException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.ImageIcon;
 import javax.swing.SwingUtilities;
@@ -22,6 +24,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jumpmind.pos.javapos.sim.ui.SimulatedDeviceWindow;
 import org.jumpmind.pos.javapos.sim.ui.SimulatedPOSPrinterPanel;
+import org.jumpmind.pos.javapos.sim.util.IEscapeSequence;
+import org.jumpmind.pos.javapos.sim.util.InMemoryBitmap;
+import org.jumpmind.pos.javapos.sim.util.PrintBitmapEscapeSequence;
 
 public class SimulatedPOSPrinterService extends AbstractSimulatedService
         implements POSPrinterService111 {
@@ -45,8 +50,11 @@ public class SimulatedPOSPrinterService extends AbstractSimulatedService
     protected int recLineSpacing;
     protected int rotateSpecial;
     protected boolean slpLetterQuality;
+    protected Map<Integer, InMemoryBitmap> inMemoryBitmaps;
+    
 
-    @Override
+
+	@Override
     public void reset() {
     }
 
@@ -68,7 +76,7 @@ public class SimulatedPOSPrinterService extends AbstractSimulatedService
                 }
                 SimulatedPOSPrinterPanel.getInstance().getTextArea().setSize(d);
                 try {
-
+                	
                     doc.insertString(doc.getLength(), newText, doc
                             .getStyle("text"));
                     SimulatedPOSPrinterPanel.getInstance().getTextArea()
@@ -140,11 +148,11 @@ public class SimulatedPOSPrinterService extends AbstractSimulatedService
     }
 
     public void printImmediate(int i, String s) throws JposException {
-        appendText(i, s);
+    	printNormalWithEscapeSequences(i, s);
     }
 
     public void printNormal(int i, String s) throws JposException {
-        appendText(i, s);
+    	printNormalWithEscapeSequences(i, s);
     }
 
     public void printMemoryBitmap(int i, byte[] abyte0, int j, int k, int l)
@@ -835,7 +843,11 @@ public class SimulatedPOSPrinterService extends AbstractSimulatedService
 
     public void setBitmap(int i, int j, String s, int k, int l)
             throws JposException {
-
+    	InMemoryBitmap bmap = new InMemoryBitmap(j, s, k, l);
+    	if (this.inMemoryBitmaps == null) {
+    		this.inMemoryBitmaps = new HashMap();
+    	}
+    	this.inMemoryBitmaps.put(new Integer(i), bmap);
     }
 
     public void setCharacterSet(int i) throws JposException {
@@ -946,5 +958,49 @@ public class SimulatedPOSPrinterService extends AbstractSimulatedService
         // TODO Auto-generated method stub
         return false;
     }
+    
+    public Map<Integer, InMemoryBitmap> getInMemoryBitmaps() {
+		return inMemoryBitmaps;
+	}
+    
+    public void printNormalWithEscapeSequences(int station, String data) throws JposException {
+		// Add additional escape sequence classes here to be filtered on.
+    	IEscapeSequence[] checkSequences = new IEscapeSequence[] { new PrintBitmapEscapeSequence() };
+    	
+    	// Capture the length - 1 so that all comparisons are against 0 based index
+    	int indexedLength = data.length() - 1;
+    	
+		int nextFilterPosition = indexedLength;
+		int previousPrintPosition = 0;
+		
+		do {
+			nextFilterPosition = indexedLength;
+			IEscapeSequence seqToPrint = null;
+			
+			// Find the position of next escape sequence
+			for (int i = 0; i < checkSequences.length; i++) {
+				int currentFilterEndPosition = checkSequences[i].findNext(data, previousPrintPosition);
+				
+				
+				if (currentFilterEndPosition >= 0 && currentFilterEndPosition <= nextFilterPosition) {
+					// We found a sequence match that occurs sooner than what we had before
+					nextFilterPosition = currentFilterEndPosition;
+					seqToPrint = checkSequences[i];
+				}
+			}
+			if (nextFilterPosition <= indexedLength) {
+				int endPrintPosition = seqToPrint == null ? data.length() : nextFilterPosition - (seqToPrint.getSequenceLength() - 1);
+				
+				// print normal text 
+				appendText(station, data.substring(previousPrintPosition, endPrintPosition));
+				
+				if (seqToPrint != null) {
+					// print the escape
+					seqToPrint.print(this);
+				}
+			}			
+			previousPrintPosition = nextFilterPosition + 1;
+		} while (nextFilterPosition  < indexedLength);
+	}
 
 }
