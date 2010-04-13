@@ -4,7 +4,7 @@
 	<groupId>org.jumpmind.pos.javapos</groupId>
 	<artifactId>pos-device-sim</artifactId>
 	<packaging>jar</packaging>
-	<version>1.0</version>
+	<version>1.0.3</version>
 	<name>POS Device Simulator</name>
 
 	<build>
@@ -67,11 +67,11 @@
 			<version>1.2.14</version>
 		</dependency>
 		<dependency>
-			<groupId>jpos</groupId>
-			<artifactId>jpos</artifactId>
-			<version>113</version>
-		</dependency>
-		<dependency>
+            <groupId>device-adaptor</groupId>
+            <artifactId>jpos111</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
 			<groupId>jpos</groupId>
 			<artifactId>postest</artifactId>
 			<version>110</version>
