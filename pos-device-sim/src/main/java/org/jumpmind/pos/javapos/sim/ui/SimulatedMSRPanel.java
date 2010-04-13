@@ -6,7 +6,7 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.InputStreamReader;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.TreeSet;
 
@@ -29,7 +29,7 @@ public class SimulatedMSRPanel extends BaseSimulatedPanel {
 
     private static final long serialVersionUID = 1L;
     private static SimulatedMSRPanel me;
-    private Map<String, MSRCardBean> cards = new HashMap<String, MSRCardBean>();
+    private Map<String, MSRCardBean> cards = new LinkedHashMap<String, MSRCardBean>();
     private MSRCardBean selectedCard;
     private SimulatedMSRService deviceCallback;
 
@@ -256,7 +256,7 @@ public class SimulatedMSRPanel extends BaseSimulatedPanel {
     public Object[] loadMSRCardBeans() {
         Object[] val = null;
         if (cards != null) {
-            val = new TreeSet<String>(cards.keySet()).toArray();
+            val = cards.keySet().toArray();
         }
         return val;
     }
