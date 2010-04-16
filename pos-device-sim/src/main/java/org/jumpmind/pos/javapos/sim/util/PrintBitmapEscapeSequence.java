@@ -10,7 +10,7 @@ public class PrintBitmapEscapeSequence extends AbstractEscapeSequence {
 	static final Log logger = LogFactory.getLog(PrintBitmapEscapeSequence.class);
 	private int bitmapNumber;
 		
-	public void print(SimulatedPOSPrinterService printerService) throws JposException {
+	public void print(SimulatedPOSPrinterService printerService, int station) throws JposException {
 		if (printerService.getInMemoryBitmaps() == null || 
 				!printerService.getInMemoryBitmaps().containsKey(new Integer(bitmapNumber))) {
 			
@@ -29,8 +29,12 @@ public class PrintBitmapEscapeSequence extends AbstractEscapeSequence {
 		if (current >= 0) {
 			int beginSeqPosition = current + getPrefix().length();
 			int endSeqPosition = data.indexOf(getSuffix(), beginSeqPosition);
-			bitmapNumber = new Integer(data.substring(beginSeqPosition, endSeqPosition)).intValue();
-			
+			if (endSeqPosition > 0) {
+				bitmapNumber = new Integer(data.substring(beginSeqPosition, endSeqPosition)).intValue();
+			} 
+			else {
+				current = -1;
+			}
 			current = endSeqPosition;
 		}
 		return current;
