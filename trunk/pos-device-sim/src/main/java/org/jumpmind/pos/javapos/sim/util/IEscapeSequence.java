@@ -5,7 +5,7 @@ import jpos.JposException;
 import org.jumpmind.pos.javapos.sim.SimulatedPOSPrinterService;
 
 public interface IEscapeSequence {
-	public void print(SimulatedPOSPrinterService service) throws JposException;
+	public void print(SimulatedPOSPrinterService service, int station) throws JposException;
 	
 	public int findNext(String data, int startPosition);
 	

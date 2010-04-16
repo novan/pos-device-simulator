@@ -27,6 +27,7 @@ import org.jumpmind.pos.javapos.sim.ui.SimulatedPOSPrinterPanel;
 import org.jumpmind.pos.javapos.sim.util.IEscapeSequence;
 import org.jumpmind.pos.javapos.sim.util.InMemoryBitmap;
 import org.jumpmind.pos.javapos.sim.util.PrintBitmapEscapeSequence;
+import org.jumpmind.pos.javapos.sim.util.PrintLineFeedEscapeSequence;
 
 public class SimulatedPOSPrinterService extends AbstractSimulatedService
         implements POSPrinterService111 {
@@ -965,7 +966,9 @@ public class SimulatedPOSPrinterService extends AbstractSimulatedService
     
     public void printNormalWithEscapeSequences(int station, String data) throws JposException {
 		// Add additional escape sequence classes here to be filtered on.
-    	IEscapeSequence[] checkSequences = new IEscapeSequence[] { new PrintBitmapEscapeSequence() };
+    	IEscapeSequence[] checkSequences = new IEscapeSequence[] { 
+    			new PrintBitmapEscapeSequence(),
+    			new PrintLineFeedEscapeSequence() };
     	
     	// Capture the length - 1 so that all comparisons are against 0 based index
     	int indexedLength = data.length() - 1;
@@ -989,14 +992,21 @@ public class SimulatedPOSPrinterService extends AbstractSimulatedService
 				}
 			}
 			if (nextFilterPosition <= indexedLength) {
-				int endPrintPosition = seqToPrint == null ? data.length() : nextFilterPosition - (seqToPrint.getSequenceLength() - 1);
+				int endPrintPosition = seqToPrint == null ? data.length() - 1 : nextFilterPosition - (seqToPrint.getSequenceLength() - 1);
 				
 				// print normal text 
-				appendText(station, data.substring(previousPrintPosition, endPrintPosition));
+				if (previousPrintPosition >= 0 && endPrintPosition >= previousPrintPosition) {
+					// Check if we are at last piece of text, if so just print remaining.
+					String text = endPrintPosition == indexedLength 
+										? data.substring(previousPrintPosition) 
+										: data.substring(previousPrintPosition, endPrintPosition);
+					
+					appendText(station, text);
+				}
 				
 				if (seqToPrint != null) {
 					// print the escape
-					seqToPrint.print(this);
+					seqToPrint.print(this, station);
 				}
 			}			
 			previousPrintPosition = nextFilterPosition + 1;
