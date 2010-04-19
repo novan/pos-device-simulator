@@ -101,8 +101,54 @@ public class SimulatedLineDisplayPanel extends BaseSimulatedPanel {
         setLayout(new BorderLayout());
         this.add(formPanel, BorderLayout.NORTH);
         this.add(scrollPane, BorderLayout.CENTER);
+        this.add(createDCCForm(), BorderLayout.SOUTH);
     }
 
+    protected JPanel createDCCForm() {
+        JPanel formPanel = new JPanel();
+        JButton btnYes = new JButton();
+        btnYes.setText("Yes");
+
+        JButton btnNo = new JButton();
+        btnNo.setText("No");
+
+        JLabel lblCreditDebitConfirm = new JLabel();
+        lblCreditDebitConfirm.setText("Confirm credit/debit");
+
+        btnYes.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (getCallbacks() != null) {
+                    String confirmMessage = "XEVT<FS>2<FS>1<FS>0<FS>DCC";
+
+                    DirectIOEvent evt = new DirectIOEvent(new LineDisplay(), 1,
+                            1, confirmMessage.getBytes());
+
+                    getCallbacks().fireDirectIOEvent(evt);
+                }
+            }
+        });
+
+        btnNo.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (getCallbacks() != null) {
+                    String confirmMessage = "XEVT<FS>2<FS>2<FS>0<FS>DCC";
+
+                    DirectIOEvent evt = new DirectIOEvent(new LineDisplay(), 1,
+                            1, confirmMessage.getBytes());
+
+                    getCallbacks().fireDirectIOEvent(evt);
+                }
+            }
+        });
+
+        formPanel.add(lblCreditDebitConfirm);
+        formPanel.add(btnYes);
+        formPanel.add(btnNo);
+        
+        return formPanel;
+    }
+    
+    
     public JTextPane getTextArea() {
         return textArea;
     }
