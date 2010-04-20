@@ -54,6 +54,12 @@ public class SimulatedScannerPanel extends BaseSimulatedPanel {
         loadItems();
 
         JComboBox cbItems = new JComboBox(loadScannerItemBeans());
+        if (cbItems != null && cbItems.getItemCount() > 0) {
+        	String label = (String) cbItems.getItemAt(0);
+            String item = items.get(label);
+
+            textField.setText(item);
+        }
         cbItems.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent e) {
                 SwingUtilities.invokeLater(new Runnable() {

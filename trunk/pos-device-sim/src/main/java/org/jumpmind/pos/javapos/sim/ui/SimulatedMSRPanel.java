@@ -58,7 +58,7 @@ public class SimulatedMSRPanel extends BaseSimulatedPanel {
         final JLabel lblTrack1Data = new JLabel("Track1 Data : ");
         final JTextField txtTrack1Data = new JTextField("");
         final JLabel lblTrack2Data = new JLabel("Track2 Data : ");
-        final JTextField txtTrack2Data = new JTextField("900556062940");
+        final JTextField txtTrack2Data = new JTextField("");
         final JLabel lblTrack3Data = new JLabel("Track3 Data : ");
         final JTextField txtTrack3Data = new JTextField("");
         final JLabel lblTrack4Data = new JLabel("Track4 Data : ");
@@ -87,6 +87,36 @@ public class SimulatedMSRPanel extends BaseSimulatedPanel {
         final JTextField txtDataCount = new JTextField("");
 
         JComboBox cbCards = new JComboBox(loadMSRCardBeans());
+        
+        if (cbCards != null && cbCards.getItemCount() > 0) {
+        	String label = (String) cbCards.getItemAt(0);
+            
+        	MSRCardBean card = cards.get(label);
+        	
+        	txtTrack1Data.setText(card.getTrack1Data());
+            txtTrack2Data.setText(card.getTrack2Data());
+            txtTrack3Data.setText(card.getTrack3Data());
+            txtTrack4Data.setText(card.getTrack4Data());
+            txtAccountNumber.setText(card.getAccountNumber());
+            txtExpirationDate.setText(card.getExpirationDate());
+            txtTitle.setText(card.getTitle());
+            txtFirstName.setText(card.getFirstName());
+            txtMiddleInitial.setText(card.getMiddleInitial());
+            txtSurname.setText(card.getSurName());
+            txtSuffix.setText(card.getSuffix());
+            txtServiceCode.setText(card.getServiceCode());
+            txtTrack1DiscData.setText(card
+                    .getTrack1DiscretionaryData());
+            txtTrack2DiscData.setText(card
+                    .getTrack2DiscretionaryData());
+            try {
+                txtDataCount.setText(new Integer(card
+                        .getDataCount()).toString());
+            } catch (Exception ex) {
+                logger
+                        .warn("Unable to set data count, not a valid integer.");
+            }
+        }
         cbCards.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent e) {
                 SwingUtilities.invokeLater(new Runnable() {
@@ -211,7 +241,7 @@ public class SimulatedMSRPanel extends BaseSimulatedPanel {
         addToGridBag(1, 16, 1, txtDataCount, c, this);
         addToGridBag(0, 17, 2, button1, c, this);
     }
-
+    
     public void loadCards() {
         SAXBuilder builder = new SAXBuilder();
         Document doc = null;
