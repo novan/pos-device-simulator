@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -59,6 +60,7 @@ public class SimulatedLineDisplayPanel extends BaseSimulatedPanel {
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 
         JPanel formPanel = new JPanel();
+        formPanel.setLayout(new BoxLayout(formPanel,BoxLayout.Y_AXIS));
         JButton btnYes = new JButton();
         btnYes.setText("Yes");
 
@@ -94,26 +96,31 @@ public class SimulatedLineDisplayPanel extends BaseSimulatedPanel {
             }
         });
 
-        formPanel.add(lblCreditDebitConfirm);
-        formPanel.add(btnYes);
-        formPanel.add(btnNo);
+        JPanel creditConfirmPanel = new JPanel();
+        creditConfirmPanel.add(lblCreditDebitConfirm);
+        creditConfirmPanel.add(btnYes);
+        creditConfirmPanel.add(btnNo);
+        
+        formPanel.add(creditConfirmPanel);
+        formPanel.add(createDCCForm());
+        
 
         setLayout(new BorderLayout());
         this.add(formPanel, BorderLayout.NORTH);
         this.add(scrollPane, BorderLayout.CENTER);
-        this.add(createDCCForm(), BorderLayout.SOUTH);
+        //this.add(createDCCForm(), BorderLayout.SOUTH);
     }
 
     protected JPanel createDCCForm() {
         JPanel formPanel = new JPanel();
         JButton btnYes = new JButton();
-        btnYes.setText("Yes");
+        btnYes.setText("Store Currency");
 
         JButton btnNo = new JButton();
-        btnNo.setText("No");
+        btnNo.setText("Foreign Currency");
 
         JLabel lblCreditDebitConfirm = new JLabel();
-        lblCreditDebitConfirm.setText("Confirm credit/debit");
+        lblCreditDebitConfirm.setText("Choose a currency");
 
         btnYes.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
