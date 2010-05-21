@@ -39,6 +39,7 @@ public class SimulatedMSRPanel extends BaseSimulatedPanel {
     public static SimulatedMSRPanel getInstance() {
         if (me == null) {
             me = new SimulatedMSRPanel();
+            me.setName("SimulatedMSRPanel");
         }
         return me;
     }
@@ -51,6 +52,7 @@ public class SimulatedMSRPanel extends BaseSimulatedPanel {
         this.setBackground(Color.LIGHT_GRAY);
 
         JButton button1 = new JButton("Swipe Card");
+        button1.setName("SwipeCard");
         button1.setSize(200, 20);
 
         loadCards();
@@ -87,6 +89,7 @@ public class SimulatedMSRPanel extends BaseSimulatedPanel {
         final JTextField txtDataCount = new JTextField("");
 
         JComboBox cbCards = new JComboBox(loadMSRCardBeans());
+        cbCards.setName("MSRCardList");
         
         if (cbCards != null && cbCards.getItemCount() > 0) {
         	String label = (String) cbCards.getItemAt(0);
