@@ -24,6 +24,8 @@ public class SimulatedDeviceWindow extends JFrame {
     public static int TAB_MICR = 5;
     public static int TAB_LINE_DISPLAY = 6;
 
+    private static final String DEFAULT_NAME = "SimDevices";
+
     private boolean initialized;
     private DeviceLegendMetaData legendMSR = new DeviceLegendMetaData("MSR");
     private DeviceLegendMetaData legendPrinter = new DeviceLegendMetaData(
@@ -67,6 +69,7 @@ public class SimulatedDeviceWindow extends JFrame {
     public void init() {
         setInitialized(true);
         me.setTitle("Simulated Devices");
+        me.setName(DEFAULT_NAME);
         me.setFocusable(false);
 
         JPanel header = buildHeader();
