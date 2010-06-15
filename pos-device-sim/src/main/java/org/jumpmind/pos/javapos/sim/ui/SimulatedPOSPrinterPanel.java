@@ -35,6 +35,7 @@ public class SimulatedPOSPrinterPanel extends BaseSimulatedPanel {
         this.setFocusable(false);
         textArea = new JTextPane();
         textArea.setEditable(false);
+        textArea.setName("POSPrinterOutput");
 
         StyledDocument doc = textArea.getStyledDocument();
         Style def = StyleContext.getDefaultStyleContext().getStyle(
