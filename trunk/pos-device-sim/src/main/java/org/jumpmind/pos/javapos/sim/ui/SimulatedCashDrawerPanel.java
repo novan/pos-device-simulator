@@ -41,11 +41,15 @@ public class SimulatedCashDrawerPanel extends BaseSimulatedPanel {
 
         this.setFocusable(false);
         this.setBackground(Color.LIGHT_GRAY);
+        this.setName("SimulatedCashDrawer");
 
         btnClose.setSize(200, 20);
         btnClose.setEnabled(false);
+        btnClose.setName("closeDrawer");
+        
         lblStatus.setSize(200, 20);
-
+        lblStatus.setName("drawerStatus");
+        
         btnClose.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 getDeviceCallback().toggleDrawer(false);
