@@ -45,10 +45,10 @@ public class SimulatedCashDrawerPanel extends BaseSimulatedPanel {
 
         btnClose.setSize(200, 20);
         btnClose.setEnabled(false);
-        btnClose.setName("closeDrawer");
+        btnClose.setName("CloseDrawer");
         
         lblStatus.setSize(200, 20);
-        lblStatus.setName("drawerStatus");
+        lblStatus.setName("DrawerStatusLabel");
         
         btnClose.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

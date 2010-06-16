@@ -101,6 +101,8 @@ public class ScribbleDragAndDrop extends JComponent implements
         // Register listeners to handle drawing
         addMouseListener(this);
         addMouseMotionListener(this);
+        
+        setName("Scribble");
 
         // Create a DragSource and DragGestureRecognizer to listen for drags
         // The DragGestureRecognizer will notify the DragGestureListener

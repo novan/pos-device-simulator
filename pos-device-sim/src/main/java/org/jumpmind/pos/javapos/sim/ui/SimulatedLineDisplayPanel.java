@@ -46,7 +46,9 @@ public class SimulatedLineDisplayPanel extends BaseSimulatedPanel {
         setInitialized(true);
 
         this.setFocusable(false);
+        this.setName("SimulatedLineDisplay");
         textArea = new JTextPane();
+        textArea.setName("LineDisplayOutput");
         textArea.setEditable(false);
 
         StyledDocument doc = textArea.getStyledDocument();
@@ -63,12 +65,15 @@ public class SimulatedLineDisplayPanel extends BaseSimulatedPanel {
         formPanel.setLayout(new BoxLayout(formPanel,BoxLayout.Y_AXIS));
         JButton btnYes = new JButton();
         btnYes.setText("Yes");
+        btnYes.setName("Yes");
 
         JButton btnNo = new JButton();
         btnNo.setText("No");
+        btnNo.setName("No");
 
         JLabel lblCreditDebitConfirm = new JLabel();
         lblCreditDebitConfirm.setText("Confirm credit/debit");
+        lblCreditDebitConfirm.setName("ConfirmCreditDebitLabel");
 
         btnYes.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -115,12 +120,15 @@ public class SimulatedLineDisplayPanel extends BaseSimulatedPanel {
         JPanel formPanel = new JPanel();
         JButton btnYes = new JButton();
         btnYes.setText("Store Currency");
+        btnYes.setName("StoreCurrency");
 
         JButton btnNo = new JButton();
         btnNo.setText("Foreign Currency");
-
+        btnNo.setName("ForeignCurrency");
+        
         JLabel lblCreditDebitConfirm = new JLabel();
         lblCreditDebitConfirm.setText("Choose a currency");
+        lblCreditDebitConfirm.setName("ChooseCurrencyLabel");
 
         btnYes.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

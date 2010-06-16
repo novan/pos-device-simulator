@@ -56,11 +56,14 @@ public class SimulatedSignatureCapturePanel extends BaseSimulatedPanel {
 
         this.setFocusable(false);
         this.setBackground(Color.LIGHT_GRAY);
+        this.setName("SimulatedSignatureCapture");
 
         JButton button1 = new JButton("Send Signature");
+        button1.setName("SendSignature");
         button1.setSize(200, 20);
 
         JButton button2 = new JButton("Clear");
+        button2.setName("Clear");
         button2.setSize(200, 20);
 
         button1.addActionListener(new ActionListener() {

@@ -60,33 +60,54 @@ public class SimulatedMICRPanel extends BaseSimulatedPanel {
         this.selectedItem = new MICRBean();
         this.setFocusable(false);
         this.setBackground(Color.LIGHT_GRAY);
+        this.setName("SimulatedMICR");
 
         JButton button1 = new JButton("Enter");
+        button1.setName("Enter");
         button1.setSize(200, 20);
 
         loadItems();
 
         final JLabel lblAccountNumber = new JLabel("Account Number : ");
+        lblAccountNumber.setName("AccountNumberLabel");
         final JTextField txtAccountNumber = new JTextField("");
+        txtAccountNumber.setName("AccountNumber");
         final JLabel lblAmount = new JLabel("Amount : ");
+        lblAmount.setName("AmountLabel");
         final JTextField txtAmount = new JTextField("");
+        txtAmount.setName("Amount");
         final JLabel lblBankNumber = new JLabel("BankNumber : ");
+        lblBankNumber.setName("BankNumberLabel");
         final JTextField txtBankNumber = new JTextField("");
+        txtBankNumber.setName("BankNumber");
         final JLabel lblCheckType = new JLabel("CheckType : ");
+        lblCheckType.setName("CheckTypeLabel");
         final JTextField txtCheckType = new JTextField("");
+        txtCheckType.setName("CheckType");
         final JLabel lblCountryCode = new JLabel("CountryCode : ");
+        lblCountryCode.setName("CountryCodeLabel");
         final JTextField txtCountryCode = new JTextField("");
+        txtCountryCode.setName("CountryCode");
         final JLabel lblEpc = new JLabel("Epc : ");
+        lblEpc.setName("EpcLabel");
         final JTextField txtEpc = new JTextField("");
+        txtEpc.setName("Epc");
         final JLabel lblRawData = new JLabel("RawData : ");
+        lblRawData.setName("RawDataLabel");
         final JTextField txtRawData = new JTextField("");
+        txtRawData.setName("RawData");
         final JLabel lblSerialNumber = new JLabel("Serial Number : ");
+        lblSerialNumber.setName("SerialNumberLabel");
         final JTextField txtSerialNumber = new JTextField("");
+        txtSerialNumber.setName("SerialNumber");
         final JLabel lblTransitNumber = new JLabel("Transit Number : ");
+        lblTransitNumber.setName("TransitNumberLabel");
         final JTextField txtTransitNumber = new JTextField("");
-
+        txtTransitNumber.setName("TransitNumber");
+        
         JComboBox cbItems = new JComboBox(loadItemMICRBeans());
-
+        cbItems.setName("MICRItems");
+        
         cbItems.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JComboBox cb = (JComboBox) e.getSource();

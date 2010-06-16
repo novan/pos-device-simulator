@@ -50,6 +50,7 @@ public class SimulatedMSRPanel extends BaseSimulatedPanel {
         this.selectedCard = new MSRCardBean();
         this.setFocusable(false);
         this.setBackground(Color.LIGHT_GRAY);
+        this.setName("SimulatedMSR");
 
         JButton button1 = new JButton("Swipe Card");
         button1.setName("SwipeCard");
@@ -58,36 +59,66 @@ public class SimulatedMSRPanel extends BaseSimulatedPanel {
         loadCards();
 
         final JLabel lblTrack1Data = new JLabel("Track1 Data : ");
+        lblTrack1Data.setName("Track1DataLabel");
         final JTextField txtTrack1Data = new JTextField("");
+        txtTrack1Data.setName("Track1Data");
         final JLabel lblTrack2Data = new JLabel("Track2 Data : ");
+        lblTrack2Data.setName("Track2DataLabel");
         final JTextField txtTrack2Data = new JTextField("");
+        txtTrack2Data.setName("Track2Data");
         final JLabel lblTrack3Data = new JLabel("Track3 Data : ");
+        lblTrack3Data.setName("Track3DataLabel");
         final JTextField txtTrack3Data = new JTextField("");
+        txtTrack3Data.setName("Track3Data");
         final JLabel lblTrack4Data = new JLabel("Track4 Data : ");
+        lblTrack4Data.setName("Track4DataLabel");
         final JTextField txtTrack4Data = new JTextField("");
+        txtTrack4Data.setName("Track4Data");
         final JLabel lblAccountNumber = new JLabel("Account Number : ");
+        lblAccountNumber.setName("AccountNumberLabel");
         final JTextField txtAccountNumber = new JTextField("");
+        txtAccountNumber.setName("AccountNumber");
         final JLabel lblExpirationDate = new JLabel("Expiration Date : ");
+        lblExpirationDate.setName("ExpirationDateLabel");
         final JTextField txtExpirationDate = new JTextField("");
+        txtExpirationDate.setName("ExpirationDate");
         final JLabel lblTitle = new JLabel("Title : ");
+        lblTitle.setName("TitleLabel");
         final JTextField txtTitle = new JTextField("");
+        txtTitle.setName("Title");
         final JLabel lblFirstName = new JLabel("FirstName : ");
+        lblFirstName.setName("FirstNameLabel");
         final JTextField txtFirstName = new JTextField("");
+        txtFirstName.setName("FirstName");
         final JLabel lblMiddleInitial = new JLabel("MiddleInitial : ");
+        lblMiddleInitial.setName("MiddleInitialLabel");
         final JTextField txtMiddleInitial = new JTextField("");
+        txtMiddleInitial.setName("MiddleInitial");
         final JLabel lblSurname = new JLabel("Surname : ");
+        lblSurname.setName("SurnameLabel");
         final JTextField txtSurname = new JTextField("");
+        txtSurname.setName("Surname");
         final JLabel lblSuffix = new JLabel("Suffix : ");
+        lblSuffix.setName("SuffixLabel");
         final JTextField txtSuffix = new JTextField("");
+        txtSuffix.setName("Suffix");
         final JLabel lblServiceCode = new JLabel("Service Code : ");
+        lblServiceCode.setName("ServiceCodeLabel");
         final JTextField txtServiceCode = new JTextField("");
+        txtServiceCode.setName("ServiceCode");
         final JLabel lblTrack1DiscData = new JLabel("Track1 Disc. Data : ");
+        lblTrack1DiscData.setName("Track1DiscDataLabel");
         final JTextField txtTrack1DiscData = new JTextField("");
+        txtTrack1DiscData.setName("Track1DiscData");
         final JLabel lblTrack2DiscData = new JLabel("Track2 Disc. Data : ");
+        lblTrack2DiscData.setName("Track2DiscDataLabel");
         final JTextField txtTrack2DiscData = new JTextField("");
+        txtTrack2DiscData.setName("Track2DiscData");
         final JLabel lblDataCount = new JLabel("Data Count : ");
+        lblDataCount.setName("DataCountLabel");
         final JTextField txtDataCount = new JTextField("");
-
+        txtDataCount.setName("DataCount");
+        
         JComboBox cbCards = new JComboBox(loadMSRCardBeans());
         cbCards.setName("MSRCardList");
         

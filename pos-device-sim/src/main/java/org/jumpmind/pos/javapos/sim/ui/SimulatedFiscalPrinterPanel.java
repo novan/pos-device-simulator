@@ -33,8 +33,10 @@ public class SimulatedFiscalPrinterPanel extends BaseSimulatedPanel {
         setInitialized(true);
 
         this.setFocusable(false);
+        this.setName("SimulatedFiscalPrinter");
         textArea = new JTextPane();
         textArea.setEditable(false);
+        textArea.setName("FiscalPrinterOutput");
 
         StyledDocument doc = textArea.getStyledDocument();
         Style def = StyleContext.getDefaultStyleContext().getStyle(
