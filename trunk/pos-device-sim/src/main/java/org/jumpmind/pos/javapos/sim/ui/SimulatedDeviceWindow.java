@@ -74,6 +74,7 @@ public class SimulatedDeviceWindow extends JFrame {
         header.setSize(400, 100);
 
         tabbedPane.setSize(400, 600);
+        tabbedPane.setName("DeviceTabs");
 
         tabbedPane.addTab("Scanner", SimulatedScannerPanel.getInstance());
         tabbedPane.addTab("MSR", SimulatedMSRPanel.getInstance());
