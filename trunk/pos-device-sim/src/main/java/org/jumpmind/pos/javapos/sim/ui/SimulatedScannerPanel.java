@@ -47,13 +47,18 @@ public class SimulatedScannerPanel extends BaseSimulatedPanel {
     }
 
     public void init() {
+    	
+    	this.setName("SimulatedScanner");
 
         final JButton button = new JButton("Scan Value In Text Box");
+        button.setName("ScanValue");
         final JTextField textField = new JTextField();
-
+        textField.setName("ScanValue");
+        
         loadItems();
 
         JComboBox cbItems = new JComboBox(loadScannerItemBeans());
+        cbItems.setName("ScannerItems");
         if (cbItems != null && cbItems.getItemCount() > 0) {
         	String label = (String) cbItems.getItemAt(0);
             String item = items.get(label);

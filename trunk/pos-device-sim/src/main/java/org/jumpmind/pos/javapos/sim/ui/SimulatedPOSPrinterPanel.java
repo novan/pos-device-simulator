@@ -33,6 +33,7 @@ public class SimulatedPOSPrinterPanel extends BaseSimulatedPanel {
         setInitialized(true);
 
         this.setFocusable(false);
+        this.setName("SimulatedPOSPrinter");
         textArea = new JTextPane();
         textArea.setEditable(false);
         textArea.setName("POSPrinterOutput");
