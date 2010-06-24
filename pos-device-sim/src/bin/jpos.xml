@@ -24,4 +24,11 @@
         <product description="Simulated POS Printer" name="Simulated POS Printer Service for JavaPOS(TM) Standard" url="http://www.javapos.com"/>        
     </JposEntry> 
     
+    <JposEntry logicalName="defaultSigcap">
+        <creation factoryClass="org.jumpmind.pos.javapos.sim.SimulatedServiceInstanceFactory" serviceClass="org.jumpmind.pos.javapos.sim.SimulatedSignatureCaptureService"/>
+        <vendor name="JumpMind, Inc" url="http://www.jumpmind.com"/>
+        <jpos category="Signature Capture" version="1.11"/>
+        <product description="Simulated Signature Capture" name="Simulated Signature Capture for JavaPOS(TM) Standard" url="http://www.javapos.com"/>        
+    </JposEntry>     
+    
 </JposEntries>

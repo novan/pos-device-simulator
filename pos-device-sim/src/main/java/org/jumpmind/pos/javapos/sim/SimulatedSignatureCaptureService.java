@@ -6,12 +6,15 @@ import jpos.JposException;
 import jpos.services.SignatureCaptureService111;
 
 import org.jumpmind.pos.javapos.sim.beans.SignatureCaptureBean;
+import org.jumpmind.pos.javapos.sim.ui.SimulatedDeviceWindow;
 import org.jumpmind.pos.javapos.sim.ui.SimulatedSignatureCapturePanel;
 
-public class SimulatedSignatureCaptureService extends AbstractSimulatedService
-        implements SignatureCaptureService111 {
+public class SimulatedSignatureCaptureService extends AbstractSimulatedService implements
+        SignatureCaptureService111 {
 
     private SignatureCaptureBean signature;
+
+    private boolean autoDisable;
 
     @Override
     public void reset() {
@@ -59,21 +62,62 @@ public class SimulatedSignatureCaptureService extends AbstractSimulatedService
         return 0;
     }
 
+    public boolean getAutoDisable() throws JposException {
+        return autoDisable;
+    }
+
+    public void setAutoDisable(boolean value) throws JposException {
+        this.autoDisable = value;
+    }
+
     public void beginCapture(String s) throws JposException {
         this.signature = new SignatureCaptureBean();
-        SimulatedSignatureCapturePanel.getInstance();
-        SimulatedSignatureCapturePanel.clear();
+        SimulatedSignatureCapturePanel panel = SimulatedSignatureCapturePanel.getInstance();
+        panel.setEnabled(true);
+    }
+
+    @Override
+    public void setDeviceEnabled(final boolean enabled) throws JposException {
+
+        SimulatedSignatureCapturePanel.getInstance().setCallbacks(
+                SimulatedSignatureCaptureService.this.callbacks);
+        SimulatedSignatureCapturePanel.getInstance().setDeviceCallback(
+                SimulatedSignatureCaptureService.this);
+
+        super.setDeviceEnabled(enabled);
+
+        invoke(new Runnable() {
+            public void run() {
+                SimulatedSignatureCapturePanel panel = SimulatedSignatureCapturePanel.getInstance();
+                if (enabled && !SimulatedSignatureCapturePanel.getInstance().isInitialized()) {
+                    panel.init();
+
+                }
+            }
+        });
+
+    }
+
+    public void setDataEventEnabled(final boolean flag) throws JposException {
+        invoke(new Runnable() {
+            public void run() {
+                SimulatedSignatureCapturePanel panel = SimulatedSignatureCapturePanel.getInstance();
+
+                SimulatedDeviceWindow.getInstance().getTabbedPane().setSelectedComponent(
+                        SimulatedSignatureCapturePanel.getInstance());
+                panel.setEnabled(flag);
+            }
+        });
     }
 
     public void clearInput() throws JposException {
-
+        SimulatedSignatureCapturePanel panel = SimulatedSignatureCapturePanel.getInstance();
+        panel.clear();
     }
 
     public void endCapture() throws JposException {
-    }
-
-    public boolean getAutoDisable() throws JposException {
-        return false;
+        SimulatedSignatureCapturePanel panel = SimulatedSignatureCapturePanel.getInstance();
+        panel.setEnabled(false);
     }
 
     public boolean getCapDisplay() throws JposException {
@@ -114,12 +158,6 @@ public class SimulatedSignatureCaptureService extends AbstractSimulatedService
 
     public boolean getRealTimeDataEnabled() throws JposException {
         return false;
-    }
-
-    public void setAutoDisable(boolean flag) throws JposException {
-    }
-
-    public void setDataEventEnabled(boolean flag) throws JposException {
     }
 
     public void setRealTimeDataEnabled(boolean flag) throws JposException {
