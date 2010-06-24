@@ -23,12 +23,13 @@ import org.jumpmind.pos.javapos.sim.SimulatedSignatureCaptureService;
 import org.jumpmind.pos.javapos.sim.beans.SignatureCaptureBean;
 
 public class SimulatedSignatureCapturePanel extends BaseSimulatedPanel {
-    static final Log logger = LogFactory
-            .getLog(SimulatedSignatureCapturePanel.class);
+    static final Log logger = LogFactory.getLog(SimulatedSignatureCapturePanel.class);
     private static final long serialVersionUID = 1L;
     private static SimulatedSignatureCapturePanel me;
     private SignatureCaptureBean signature;
     private SimulatedSignatureCaptureService deviceCallback;
+    private JButton clearButton;
+    private JButton sendButton;
     private Point points[] = new Point[2];
     ScribbleDragAndDrop s = new ScribbleDragAndDrop();
 
@@ -46,9 +47,9 @@ public class SimulatedSignatureCapturePanel extends BaseSimulatedPanel {
         return me;
     }
 
-    public static void clear() {
-        me.s.scribbles = new ArrayList<Scribble>();
-        me.s.repaint();
+    public void clear() {
+        s.scribbles = new ArrayList<Scribble>();
+        s.repaint();
     }
 
     public void init() {
@@ -58,15 +59,17 @@ public class SimulatedSignatureCapturePanel extends BaseSimulatedPanel {
         this.setBackground(Color.LIGHT_GRAY);
         this.setName("SimulatedSignatureCapture");
 
-        JButton button1 = new JButton("Send Signature");
-        button1.setName("SendSignature");
-        button1.setSize(200, 20);
+        sendButton = new JButton("Send Signature");
+        sendButton.setName("SendSignature");
+        sendButton.setSize(200, 20);
+        sendButton.setEnabled(false);
 
-        JButton button2 = new JButton("Clear");
-        button2.setName("Clear");
-        button2.setSize(200, 20);
+        clearButton = new JButton("Clear");
+        clearButton.setName("Clear");
+        clearButton.setSize(200, 20);
+        clearButton.setEnabled(false);
 
-        button1.addActionListener(new ActionListener() {
+        sendButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (getCallbacks() != null) {
                     SignatureCapture sigCap = new SignatureCapture();
@@ -82,8 +85,7 @@ public class SimulatedSignatureCapturePanel extends BaseSimulatedPanel {
 
                         for (int i = 1; i + 1 < scribble.points.length; i = i + 2) {
                             int x = new Double(scribble.points[i]).intValue();
-                            int y = new Double(scribble.points[i + 1])
-                                    .intValue();
+                            int y = new Double(scribble.points[i + 1]).intValue();
 
                             if (x > 0 && y > 0) {
                                 Point p = new Point(x, y);
@@ -96,15 +98,16 @@ public class SimulatedSignatureCapturePanel extends BaseSimulatedPanel {
                             .toArray(new Point[pointList.size()]));
                     signature.setRawData(null);
 
-                    getDeviceCallback().setSignature(signature);
+                    SimulatedSignatureCaptureService service = getDeviceCallback();
+                    service.setSignature(signature);                    
                     getCallbacks().fireDataEvent(new DataEvent(evt, 1));
                 }
             }
         });
 
-        button2.addActionListener(new ActionListener() {
+        clearButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                SimulatedSignatureCapturePanel.clear();
+                clear();
                 signature = new SignatureCaptureBean();
             }
         });
@@ -113,10 +116,17 @@ public class SimulatedSignatureCapturePanel extends BaseSimulatedPanel {
         s.setSize(300, 300);
         s.setVisible(true);
 
-        add(button1, BorderLayout.NORTH);
+        add(sendButton, BorderLayout.NORTH);
         add(s, BorderLayout.CENTER);
-        add(button2, BorderLayout.SOUTH);
+        add(clearButton, BorderLayout.SOUTH);
 
+    }
+
+    public void setEnabled(boolean enabled) {
+        super.setEnabled(enabled);
+        sendButton.setEnabled(enabled);
+        clearButton.setEnabled(enabled);
+        clear();
     }
 
     public class PaintPanel extends JPanel {
@@ -163,15 +173,17 @@ public class SimulatedSignatureCapturePanel extends BaseSimulatedPanel {
             if (p0Exists) {
                 g.drawOval(points[0].x - r / 2, points[0].y - r / 2, r, r);
                 g.drawString("Point0", points[0].x, points[0].y - 3 * r);
-                g.drawString("x=" + points[0].x + " y=" + points[0].y,
-                        points[0].x, points[0].y - r);
+                g
+                        .drawString("x=" + points[0].x + " y=" + points[0].y, points[0].x,
+                                points[0].y - r);
                 // g.drawLine(points[ 0 ].x - r/2, points[ 0 ].y - r/2, r, r);
             }
             if (p1Exists) {
                 g.drawOval(points[1].x - r / 2, points[1].y - r / 2, r, r);
                 g.drawString("Point1", points[1].x, points[1].y - 3 * r);
-                g.drawString("x=" + points[1].x + " y=" + points[1].y,
-                        points[1].x, points[1].y - r);
+                g
+                        .drawString("x=" + points[1].x + " y=" + points[1].y, points[1].x,
+                                points[1].y - r);
             }
             if (p0Exists && p1Exists) {
                 g.drawLine(points[0].x, points[0].y, points[1].x, points[1].y);
@@ -183,8 +195,7 @@ public class SimulatedSignatureCapturePanel extends BaseSimulatedPanel {
         return deviceCallback;
     }
 
-    public void setDeviceCallback(
-            SimulatedSignatureCaptureService deviceCallback) {
+    public void setDeviceCallback(SimulatedSignatureCaptureService deviceCallback) {
         this.deviceCallback = deviceCallback;
     }
 
