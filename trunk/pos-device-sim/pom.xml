@@ -1,5 +1,5 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.jumpmind.pos.javapos</groupId>
     <artifactId>pos-device-sim</artifactId>
@@ -7,15 +7,26 @@
     <version>1.0.16</version>
     <name>POS Device Simulator</name>
 
+    <properties>
+        <repo.id></repo.id>
+        <repo.url></repo.url>
+    </properties>
+
+    <distributionManagement>
+        <repository>
+            <id>${repo.id}</id>
+            <name>Repository</name>
+            <url>${repo.url}</url>
+        </repository>
+        <snapshotRepository>
+            <id>${repo.id}</id>
+            <name>Snapshot Repository</name>
+            <url>${repo.url}</url>
+        </snapshotRepository>
+    </distributionManagement>
+
     <build>
-        <finalName>pos-device-sim</finalName>
         <plugins>
-            <plugin>
-                <artifactId>maven-release-plugin</artifactId>
-                <configuration>
-                    <autoVersionSubmodules>true</autoVersionSubmodules>
-                </configuration>
-            </plugin>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
@@ -24,18 +35,6 @@
                     <optimize>true</optimize>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                        </manifest>
-                    </archive>
-                </configuration>
-            </plugin>
-
         </plugins>
     </build>
 
@@ -104,6 +103,5 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
 
 </project>
