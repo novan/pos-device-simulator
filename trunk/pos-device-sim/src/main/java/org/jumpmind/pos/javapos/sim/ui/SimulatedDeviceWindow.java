@@ -23,6 +23,7 @@ public class SimulatedDeviceWindow extends JFrame {
     public static int TAB_SIG_CAP = 4;
     public static int TAB_MICR = 5;
     public static int TAB_LINE_DISPLAY = 6;
+    public static int TAB_PIN_PAD = 7;
 
     private boolean initialized;
     private DeviceLegendMetaData legendMSR = new DeviceLegendMetaData("MSR");
@@ -30,6 +31,7 @@ public class SimulatedDeviceWindow extends JFrame {
             "Printer");
     private DeviceLegendMetaData legendCashDrawer = new DeviceLegendMetaData(
             "Cash Drawer");
+    private DeviceLegendMetaData legendPinPad = new DeviceLegendMetaData("PIN Pad");
     private JTabbedPane tabbedPane = new JTabbedPane();
 
     private SimulatedDeviceWindow() {
@@ -89,6 +91,7 @@ public class SimulatedDeviceWindow extends JFrame {
                 .getInstance());
         tabbedPane.addTab("Fiscal Printer", SimulatedFiscalPrinterPanel
                 .getInstance());
+        tabbedPane.addTab("PIN Pad", SimulatedPINPadPanel.getInstance());
 
         me.setLayout(new BorderLayout());
         add(tabbedPane, BorderLayout.CENTER);
@@ -150,6 +153,10 @@ public class SimulatedDeviceWindow extends JFrame {
 
     public DeviceLegendMetaData getLegendCashDrawer() {
         return legendCashDrawer;
+    }
+    
+    public DeviceLegendMetaData getLegendPINPad() {
+    	return legendPinPad;
     }
 
     private class DeviceLegendMetaData extends JPanel {
