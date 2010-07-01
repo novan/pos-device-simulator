@@ -31,4 +31,11 @@
         <product description="Simulated Signature Capture" name="Simulated Signature Capture for JavaPOS(TM) Standard" url="http://www.javapos.com"/>        
     </JposEntry>  
         
+    <JposEntry logicalName="defaultPINPad">
+        <creation factoryClass="org.jumpmind.pos.javapos.sim.SimulatedServiceInstanceFactory" serviceClass="org.jumpmind.pos.javapos.sim.SimulatedPINPadService"/>
+        <vendor name="JumpMind, Inc" url="http://www.jumpmind.com"/>
+        <jpos category="PinPad" version="1.11"/>
+        <product description="Simulated PIN Pad" name="Simulated PIN Pad for JavaPOS(TM) Standard" url="http://www.javapos.com"/>        
+    </JposEntry>  
+        
 </JposEntries>
