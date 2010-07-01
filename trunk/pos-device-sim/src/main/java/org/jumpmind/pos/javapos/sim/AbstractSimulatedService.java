@@ -18,6 +18,7 @@ import org.jumpmind.pos.javapos.sim.ui.SimulatedDeviceWindow;
 import org.jumpmind.pos.javapos.sim.ui.SimulatedLineDisplayPanel;
 import org.jumpmind.pos.javapos.sim.ui.SimulatedMICRPanel;
 import org.jumpmind.pos.javapos.sim.ui.SimulatedMSRPanel;
+import org.jumpmind.pos.javapos.sim.ui.SimulatedPINPadPanel;
 import org.jumpmind.pos.javapos.sim.ui.SimulatedPOSPrinterPanel;
 import org.jumpmind.pos.javapos.sim.ui.SimulatedScannerPanel;
 
@@ -186,6 +187,18 @@ public abstract class AbstractSimulatedService {
             SimulatedLineDisplayPanel.getInstance().setCallbacks(this.callbacks);
             SimulatedLineDisplayPanel.getInstance().setDeviceCallback(
                     (SimulatedLineDisplayService) this);
+        } else if (this instanceof SimulatedPINPadService) {
+            invoke(new Runnable() {
+                public void run() {
+                    if (!SimulatedPINPadPanel.getInstance().isInitialized()) {
+                    	SimulatedPINPadPanel.getInstance().init();
+                    }
+                    SimulatedDeviceWindow.getInstance().getTabbedPane().setSelectedIndex(
+                            SimulatedDeviceWindow.TAB_PIN_PAD);
+                }
+            });
+            SimulatedPINPadPanel.getInstance().setCallbacks(this.callbacks);
+            SimulatedPINPadPanel.getInstance().setDeviceCallback((SimulatedPINPadService) this);
         } else if (this instanceof SimulatedScannerService) {
             invoke(new Runnable() {
                 public void run() {
