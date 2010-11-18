@@ -10,8 +10,11 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
+import jpos.LineDisplay;
 import jpos.PINPad;
 import jpos.events.DataEvent;
+import jpos.events.DirectIOEvent;
+import jpos.events.ErrorEvent;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -47,6 +50,7 @@ public class SimulatedPINPadPanel extends BaseSimulatedPanel {
         textField.setName("PinValue");
         textField.setSize(200, 20);
         textField.setPreferredSize(new Dimension(200, 20));
+        textField.setText("1234");
 
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -57,8 +61,39 @@ public class SimulatedPINPadPanel extends BaseSimulatedPanel {
 //                final byte[] textFieldValue = textField.getText().getBytes();
 
                     if (getCallbacks() != null) {
+                		deviceCallback.setUserEnteredPIN(textField.getText());
+
                     	PINPad pinpad = new PINPad();
-                        DataEvent evt = new DataEvent(pinpad, 1);
+                        DataEvent evt = new DataEvent(pinpad, 0);
+
+                        getCallbacks().fireDataEvent(evt);
+                        
+                        
+                        /*
+                        //String confirmMessage = "XEVT<FS>2<FS>1<FS>0<FS>CANCEL";
+                        //String confirmMessage = "<STX>XIFM<FS>CONFIRM<ETX>W";
+                        String confirmMessage = "XIFM<FS>1";
+
+                        DirectIOEvent evt2 = new DirectIOEvent(new LineDisplay(), 1,
+                                1, confirmMessage.getBytes());
+
+                        getCallbacks().fireDirectIOEvent(evt2);
+                        */
+                        
+                        
+                    }
+                }
+        });
+        
+        final JButton cancelButton = new JButton("Cancel");
+        cancelButton.setName("CancelPin");
+        
+        cancelButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            		deviceCallback.setUserEnteredPIN(null);
+                    if (getCallbacks() != null) {
+                    	PINPad pinpad = new PINPad();
+                        DataEvent evt = new DataEvent(pinpad, 0);
 
                         getCallbacks().fireDataEvent(evt);
                     }
@@ -69,6 +104,7 @@ public class SimulatedPINPadPanel extends BaseSimulatedPanel {
 
         addToGridBag(0, 0, 0, textField, c, this);
         addToGridBag(0, 1, 0, button, c, this);
+        addToGridBag(1, 1, 0, cancelButton, c, this);
     }    
     
     public SimulatedPINPadService getDeviceCallback() {

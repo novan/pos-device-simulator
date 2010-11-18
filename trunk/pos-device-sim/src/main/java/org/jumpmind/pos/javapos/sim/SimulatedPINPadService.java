@@ -8,6 +8,8 @@ import org.jumpmind.pos.javapos.sim.ui.SimulatedPINPadPanel;
 
 public class SimulatedPINPadService extends AbstractSimulatedService
         implements PINPadService111 {
+	
+	private String userEnteredPIN;
 
 	@Override
 	public void reset() {
@@ -152,7 +154,7 @@ public class SimulatedPINPadService extends AbstractSimulatedService
 	}
 
 	public String getEncryptedPIN() throws JposException {
-		return "1234";
+		return userEnteredPIN;
 	}
 
 	public int getMaximumPINLength() throws JposException {
@@ -312,6 +314,14 @@ public class SimulatedPINPadService extends AbstractSimulatedService
 	public String getPhysicalDeviceName() throws JposException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public String getUserEnteredPIN() {
+		return userEnteredPIN;
+	}
+
+	public void setUserEnteredPIN(String userEnteredPIN) {
+		this.userEnteredPIN = userEnteredPIN;
 	}
 
 }
