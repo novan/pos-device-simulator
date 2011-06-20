@@ -19,6 +19,7 @@ import javax.swing.SwingUtilities;
 import jpos.MSR;
 import jpos.events.DataEvent;
 
+import org.apache.commons.lang.StringUtils;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
@@ -331,5 +332,19 @@ public class SimulatedMSRPanel extends BaseSimulatedPanel {
 
     public void setDeviceCallback(SimulatedMSRService deviceCallback) {
         this.deviceCallback = deviceCallback;
+    }
+    
+    public boolean isGiftCard(String accountNumber) {
+    	boolean isGiftCard = false;
+    	for (MSRCardBean bean : cards.values()) {
+    		if (StringUtils.equals(accountNumber, bean.getAccountNumber())) {
+    			System.err.println(bean.getAccountNumber() + " " + bean.getLabel());
+    			if (StringUtils.containsIgnoreCase(bean.getLabel(), "gift")) {
+    				isGiftCard = true;
+    				break;
+    			}
+    		}
+    	}
+    	return isGiftCard;
     }
 }
