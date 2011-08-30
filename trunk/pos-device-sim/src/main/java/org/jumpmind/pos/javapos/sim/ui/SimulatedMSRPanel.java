@@ -347,4 +347,8 @@ public class SimulatedMSRPanel extends BaseSimulatedPanel {
     	}
     	return isGiftCard;
     }
+    
+    public Map<String, MSRCardBean> getCards() {
+    	return cards;
+    }
 }
