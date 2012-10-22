@@ -335,17 +335,33 @@ public class SimulatedMSRPanel extends BaseSimulatedPanel {
     }
     
     public boolean isGiftCard(String accountNumber) {
-    	boolean isGiftCard = false;
+    	return (getGiftCardType(accountNumber).equalsIgnoreCase("gift") ? true : false);
+    }
+    
+    public boolean isPromoCard(String accountNumber) {
+    	return (getGiftCardType(accountNumber).equalsIgnoreCase("promo") ? true : false);
+    }
+    
+    public boolean isMerchCard(String accountNumber) {
+    	return (getGiftCardType(accountNumber).equalsIgnoreCase("merch") ? true : false);
+    }
+    
+    public String getGiftCardType(String accountNumber) {
+    	String cardType = "unknown";
     	for (MSRCardBean bean : cards.values()) {
-    		if (StringUtils.equals(accountNumber, bean.getAccountNumber())) {
+    		if (StringUtils.isNotBlank(bean.getAccountNumber()) && bean.getAccountNumber().startsWith(accountNumber)) {
     			System.err.println(bean.getAccountNumber() + " " + bean.getLabel());
-    			if (StringUtils.containsIgnoreCase(bean.getLabel(), "gift")) {
-    				isGiftCard = true;
-    				break;
+    			if (StringUtils.containsIgnoreCase(bean.getLabel(), "promo")) {
+    				cardType = "promo";
+    			} else if (StringUtils.containsIgnoreCase(bean.getLabel(), "merch")) {
+    				cardType = "merch";
+    			} else {
+    				cardType = "gift";
     			}
+    			break;
     		}
     	}
-    	return isGiftCard;
+    	return cardType;
     }
     
     public Map<String, MSRCardBean> getCards() {
